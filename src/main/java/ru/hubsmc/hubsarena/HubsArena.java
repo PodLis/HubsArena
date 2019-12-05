@@ -13,7 +13,7 @@ import java.util.logging.Level;
 
 public final class HubsArena extends JavaPlugin {
 
-    public static final String CHAT_PREFIX = ChatColor.DARK_GREEN + "[" + ChatColor.GREEN + "HV" + ChatColor.DARK_GREEN + "] " + ChatColor.GREEN;
+    public static final String CHAT_PREFIX = ChatColor.DARK_GREEN + "[" + ChatColor.GREEN + "HA" + ChatColor.DARK_GREEN + "] " + ChatColor.GREEN;
 
     private FileConfiguration configuration;
     private File configFile;
