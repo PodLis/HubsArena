@@ -1,0 +1,8 @@
+name: HubsArena
+version: ${project.version}
+main: ru.hubsmc.hubsarena.HubsArena
+api-version: 1.13
+prefix: [HubsArena]
+authors: [Rosenboum, pavel151]
+description: For the Arena
+website: hubsmc.ru
