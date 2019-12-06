@@ -14,6 +14,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 
+import static ru.hubsmc.hubsarena.util.StringUtils.replaceColor;
+
 public class Commands implements CommandExecutor, TabCompleter {
 
     private HubsArena plugin;
@@ -114,10 +116,6 @@ public class Commands implements CommandExecutor, TabCompleter {
             c.add(cmd);
         }
         return c;
-    }
-
-    private String replaceColor(String s) {
-        return s.replace("&", "\u00a7");
     }
 
     private void sendMessage(CommandSender sender, String message) {

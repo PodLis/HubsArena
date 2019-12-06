@@ -1,1 +1,12 @@
 # HubsArena
+lobby-coordinates:
+  world: w_kitpvp
+  x: -110.5
+  y: 28
+  z: 175.5
+  yaw: 0
+  pitch: 0
+
+menu:
+  name: '&e&lКит меню'
+  material: 'COMPASS'
