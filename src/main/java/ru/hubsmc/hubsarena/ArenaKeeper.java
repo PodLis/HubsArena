@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static ru.hubsmc.hubsvalues.api.API.updateCustomPlaceholders;
+
 public class ArenaKeeper {
 
     private Map<Player, Hero> heroMap;
@@ -38,6 +40,7 @@ public class ArenaKeeper {
                 break;
             }
         }
+        updateCustomPlaceholders(player, heroMap.get(player).getName(), "", "", "");
     }
 
     public void sendPlayer(Player player) {

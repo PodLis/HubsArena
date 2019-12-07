@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 
 import static ru.hubsmc.hubsarena.util.StringUtils.replaceColor;
+import static ru.hubsmc.hubsvalues.api.API.updateCustomPlaceholders;
 
 public class Commands implements CommandExecutor, TabCompleter {
 
@@ -72,6 +73,10 @@ public class Commands implements CommandExecutor, TabCompleter {
                             }
 
                             Player player = Bukkit.getPlayer(args[1]);
+                            if (player == null) {
+                                sendPrefixMessage(sender, "Player must be online!");
+                                return true;
+                            }
                             plugin.getArenaKeeper().pickHero(player, ArenaKeeper.Heroes.valueOf("ARCHER"));
                             plugin.getArenaKeeper().sendPlayer(player);
 

@@ -73,5 +73,12 @@
             <version>1.14.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>ru.hubsmc</groupId>
+            <artifactId>hubsvalues</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/HubsValues-1.0-SNAPSHOT.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>
