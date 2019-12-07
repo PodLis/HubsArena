@@ -19,9 +19,13 @@ permissions:
     children:
       hubsarena.help: true
       hubsarena.reload: true
+      hubsarena.send: true
   hubsarena.help:
     description: Display help message.
     default: false
   hubsarena.reload:
     description: Reload the config files.
+    default: false
+  hubsarena.send:
+    description: Send the player to battle.
     default: false

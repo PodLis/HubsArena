@@ -46,6 +46,7 @@ public class Commands implements CommandExecutor, TabCompleter {
                     }
                     sendPrefixMessage(sender, "Commands:");
                     sendMessage(sender, "/" + label + " reload&7 - Reloads the plugin.");
+                    sendMessage(sender, "/" + label + " send <player> [hero]&7 - Send player to battle.");
                     return true;
                 }
 
@@ -60,6 +61,26 @@ public class Commands implements CommandExecutor, TabCompleter {
                     plugin.loadConfiguration();
 
                     sendPrefixMessage(sender, "Plugin reloaded.");
+
+                    return true;
+                }
+
+
+                else if (args[0].equalsIgnoreCase("send"))
+                {
+                    if (sender instanceof Player && !sender.hasPermission(Permissions.Perm.SEND.getPerm())) {
+                        sendPrefixMessage(sender, "You have no permissions to use&6 " + args[0]);
+                        return true;
+                    }
+
+                    if (args.length < 2) {
+                        sendPrefixMessage(sender, "Not enough arguments!");
+                        return true;
+                    }
+
+                    Player player = Bukkit.getPlayer(args[1]);
+                    plugin.getArenaKeeper().pickHero(player, ArenaKeeper.Heroes.valueOf("ARCHER"));
+                    plugin.getArenaKeeper().sendPlayer(player);
 
                     return true;
                 }
@@ -109,7 +130,7 @@ public class Commands implements CommandExecutor, TabCompleter {
 
     private List<String> getCmds(CommandSender sender) {
         List<String> c = new ArrayList<>();
-        for (String cmd : Arrays.asList("help", "reload")) {
+        for (String cmd : Arrays.asList("help", "reload", "send")) {
             if (!sender.hasPermission("hubsarena." + cmd)) {
                 continue;
             }

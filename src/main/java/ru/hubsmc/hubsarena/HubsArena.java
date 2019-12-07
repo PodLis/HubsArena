@@ -25,6 +25,8 @@ public final class HubsArena extends JavaPlugin {
     public static World LOBBY_WORLD;
     public static ItemStack ITEM_MENU;
 
+    private ArenaKeeper arenaKeeper;
+
     private FileConfiguration configuration;
     private File configFile;
 
@@ -41,6 +43,8 @@ public final class HubsArena extends JavaPlugin {
             getCommand("hubsarena").setExecutor(commands);
             getCommand("hubsarena").setTabCompleter(commands);
 
+            arenaKeeper = new ArenaKeeper();
+
             logConsole("Successfully enabled.");
         } catch (Throwable e) {
             e.printStackTrace();
@@ -50,6 +54,10 @@ public final class HubsArena extends JavaPlugin {
 
     @Override
     public void onDisable() {
+    }
+
+    public ArenaKeeper getArenaKeeper() {
+        return arenaKeeper;
     }
 
     void loadConfiguration() {

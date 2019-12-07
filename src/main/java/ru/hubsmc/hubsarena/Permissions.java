@@ -5,7 +5,8 @@ public class Permissions {
     public enum Perm {
 
         HELP("hubsarena.help"),
-        RELOAD("hubsarena.reload");
+        RELOAD("hubsarena.reload"),
+        SEND("hubsarena.send");
 
         private final String perm;
 
