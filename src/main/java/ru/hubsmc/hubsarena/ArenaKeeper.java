@@ -20,9 +20,9 @@ public class ArenaKeeper {
     private YamlConfiguration dataFileConfig;
 
     public ArenaKeeper(File dataFile) {
-        heroMap = new HashMap<>();
+        this.heroMap = new HashMap<>();
         this.dataFile = dataFile;
-        dataFileConfig = YamlConfiguration.loadConfiguration(dataFile);
+        this.dataFileConfig = YamlConfiguration.loadConfiguration(dataFile);
     }
 
     public enum Heroes {ARCHER, KNIGHT}
