@@ -95,7 +95,9 @@ public final class HubsArena extends JavaPlugin {
         for (String s : configuration.getStringList("arena-spawns")) {
             String[] coordinates = s.split(":");
             SPAWN_LOCATIONS.add(new Location(ARENA_WORLD,
-                    Double.parseDouble(coordinates[0]), Double.parseDouble(coordinates[1]), Double.parseDouble(coordinates[2]),
+                    Double.parseDouble(coordinates[0]),
+                    Double.parseDouble(coordinates[1]),
+                    Double.parseDouble(coordinates[2]),
                     0, 0));
         }
 

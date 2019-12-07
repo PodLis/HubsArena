@@ -28,69 +28,60 @@ public class Commands implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         try {
             if (command.getName().equalsIgnoreCase("hubsarena")) {
-
-
-                if (args.length == 0)
-                {
+                if (args.length == 0) {
                     sendPrefixMessage(sender, "&b&l Info");
                     sendMessage(sender, "&5Version:&a " + plugin.getDescription().getVersion());
                     sendMessage(sender, "&5Author, created by:&a Rosenboum, pavel151");
-                }
+                } else {
+                    switch (args[0].toLowerCase()) {
+                        case "help":
+                            if (!sender.hasPermission(Permissions.Perm.HELP.getPerm())) {
+                                sendPrefixMessage(sender, "You have no permissions to use&6 " + args[0]);
+                                return true;
+                            }
+                            sendPrefixMessage(sender, "Commands:");
+                            sendMessage(sender, "/" + label + " reload&7 - Reloads the plugin.");
+                            sendMessage(sender, "/" + label + " send <player> [hero]&7 - Send player to battle.");
+                            return true;
 
 
-                else if (args[0].equalsIgnoreCase("help"))
-                {
-                    if (!sender.hasPermission(Permissions.Perm.HELP.getPerm())) {
-                        sendPrefixMessage(sender, "You have no permissions to use&6 " + args[0]);
-                        return true;
+                        case "reload":
+                            if (sender instanceof Player && !sender.hasPermission(Permissions.Perm.RELOAD.getPerm())) {
+                                sendPrefixMessage(sender, "You have no permissions to use&6 " + args[0]);
+                                return true;
+                            }
+
+                            plugin.getArenaKeeper().savePlayers();
+                            plugin.loadConfiguration();
+                            plugin.getArenaKeeper().loadPlayers();
+
+                            sendPrefixMessage(sender, "Plugin reloaded.");
+
+                            return true;
+
+
+                        case "send":
+                            if (sender instanceof Player && !sender.hasPermission(Permissions.Perm.SEND.getPerm())) {
+                                sendPrefixMessage(sender, "You have no permissions to use&6 " + args[0]);
+                                return true;
+                            }
+
+                            if (args.length < 2) {
+                                sendPrefixMessage(sender, "Not enough arguments!");
+                                return true;
+                            }
+
+                            Player player = Bukkit.getPlayer(args[1]);
+                            plugin.getArenaKeeper().pickHero(player, ArenaKeeper.Heroes.valueOf("ARCHER"));
+                            plugin.getArenaKeeper().sendPlayer(player);
+
+                            return true;
+
+
+                        default:
+                            sendPrefixMessage(sender, "unknown sub-command&6 " + args[0]);
+                            return true;
                     }
-                    sendPrefixMessage(sender, "Commands:");
-                    sendMessage(sender, "/" + label + " reload&7 - Reloads the plugin.");
-                    sendMessage(sender, "/" + label + " send <player> [hero]&7 - Send player to battle.");
-                    return true;
-                }
-
-
-                else if (args[0].equalsIgnoreCase("reload"))
-                {
-                    if (sender instanceof Player && !sender.hasPermission(Permissions.Perm.RELOAD.getPerm())) {
-                        sendPrefixMessage(sender, "You have no permissions to use&6 " + args[0]);
-                        return true;
-                    }
-
-                    plugin.getArenaKeeper().savePlayers();
-                    plugin.loadConfiguration();
-                    plugin.getArenaKeeper().loadPlayers();
-
-                    sendPrefixMessage(sender, "Plugin reloaded.");
-
-                    return true;
-                }
-
-
-                else if (args[0].equalsIgnoreCase("send"))
-                {
-                    if (sender instanceof Player && !sender.hasPermission(Permissions.Perm.SEND.getPerm())) {
-                        sendPrefixMessage(sender, "You have no permissions to use&6 " + args[0]);
-                        return true;
-                    }
-
-                    if (args.length < 2) {
-                        sendPrefixMessage(sender, "Not enough arguments!");
-                        return true;
-                    }
-
-                    Player player = Bukkit.getPlayer(args[1]);
-                    plugin.getArenaKeeper().pickHero(player, ArenaKeeper.Heroes.valueOf("ARCHER"));
-                    plugin.getArenaKeeper().sendPlayer(player);
-
-                    return true;
-                }
-
-
-                else {
-                    sendPrefixMessage(sender, "unknown sub-command&6 " + args[0]);
-                    return true;
                 }
             }
         } catch (Throwable e) {

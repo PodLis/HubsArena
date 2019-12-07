@@ -1,0 +1,21 @@
+# HubsArena
+lobby-coordinates:
+  world: w_kitpvp
+  x: -110.5
+  y: 28
+  z: 175.5
+  yaw: 0
+  pitch: 0
+
+# possible placeholders: %player%, %hero%, %alt_hero%
+on-arena-join-notifications:
+  - 'На Арену зашёл %hero% %player%'
+  - '%player% в образе %alt_hero% сейчас будет нагибать!'
+
+menu:
+  name: '&e&lКит меню'
+  material: 'COMPASS'
+
+arena-spawns:
+  - '-13.5:64:-150.5'
+  - '-54.5:64:-175.5'
