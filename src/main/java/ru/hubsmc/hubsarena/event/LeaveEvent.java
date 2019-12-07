@@ -2,15 +2,20 @@ package ru.hubsmc.hubsarena.event;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import ru.hubsmc.hubsarena.ArenaKeeper;
 
 public class LeaveEvent implements Listener {
 
-    public LeaveEvent() {
+    private ArenaKeeper arenaKeeper;
+
+    public LeaveEvent(ArenaKeeper arenaKeeper) {
+        this.arenaKeeper = arenaKeeper;
     }
 
     @EventHandler
-    public void onQuit(PlayerJoinEvent event) {
+    public void onQuit(PlayerQuitEvent event) {
+        arenaKeeper.savePlayer(event.getPlayer());
     }
 
 }

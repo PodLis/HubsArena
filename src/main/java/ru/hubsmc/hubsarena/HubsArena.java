@@ -1,9 +1,6 @@
 package ru.hubsmc.hubsarena;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
@@ -13,6 +10,8 @@ import ru.hubsmc.hubsarena.event.JoinEvent;
 import ru.hubsmc.hubsarena.event.LeaveEvent;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 
 import static ru.hubsmc.hubsarena.util.StringUtils.replaceColor;
@@ -21,9 +20,11 @@ public final class HubsArena extends JavaPlugin {
 
     public static final String CHAT_PREFIX = ChatColor.DARK_GREEN + "[" + ChatColor.GREEN + "HA" + ChatColor.DARK_GREEN + "] " + ChatColor.GREEN;
 
-    public static float LOBBY_X, LOBBY_Y, LOBBY_Z, LOBBY_YAW, LOBBY_PITCH;
-    public static World LOBBY_WORLD;
+    public static World ARENA_WORLD;
+    public static Location LOBBY_LOCATION;
+    public static List<Location> SPAWN_LOCATIONS;
     public static ItemStack ITEM_MENU;
+    public static List<String> JOIN_NOTIFICATIONS;
 
     private ArenaKeeper arenaKeeper;
 
@@ -36,14 +37,14 @@ public final class HubsArena extends JavaPlugin {
         loadConfiguration();
 
         try {
-            getServer().getPluginManager().registerEvents(new LeaveEvent(), this);
-            getServer().getPluginManager().registerEvents(new JoinEvent(), this);
+            arenaKeeper = new ArenaKeeper(new File(getFolder(), "data.yml"));
+
+            getServer().getPluginManager().registerEvents(new LeaveEvent(arenaKeeper), this);
+            getServer().getPluginManager().registerEvents(new JoinEvent(arenaKeeper), this);
 
             Commands commands = new Commands(this);
             getCommand("hubsarena").setExecutor(commands);
             getCommand("hubsarena").setTabCompleter(commands);
-
-            arenaKeeper = new ArenaKeeper();
 
             logConsole("Successfully enabled.");
         } catch (Throwable e) {
@@ -79,12 +80,25 @@ public final class HubsArena extends JavaPlugin {
             logConsole(Level.WARNING, "There was a file error.");
         }
 
-        LOBBY_WORLD = Bukkit.getWorld(configuration.getString("lobby-coordinates.world"));
-        LOBBY_X = (float) configuration.getDouble("lobby-coordinates.x");
-        LOBBY_Y = (float) configuration.getDouble("lobby-coordinates.y");
-        LOBBY_Z = (float) configuration.getDouble("lobby-coordinates.z");
-        LOBBY_YAW = (float) configuration.getDouble("lobby-coordinates.yaw");
-        LOBBY_PITCH = (float) configuration.getDouble("lobby-coordinates.pitch");
+        JOIN_NOTIFICATIONS = configuration.getStringList("on-arena-join-notifications");
+
+        ARENA_WORLD = Bukkit.getWorld(configuration.getString("lobby-coordinates.world"));
+
+        LOBBY_LOCATION = new Location(ARENA_WORLD,
+                (float) configuration.getDouble("lobby-coordinates.x"),
+                (float) configuration.getDouble("lobby-coordinates.y"),
+                (float) configuration.getDouble("lobby-coordinates.z"),
+                (float) configuration.getDouble("lobby-coordinates.yaw"),
+                (float) configuration.getDouble("lobby-coordinates.pitch"));
+
+        SPAWN_LOCATIONS = new ArrayList<>();
+        for (String s : configuration.getStringList("arena-spawns")) {
+            String[] coordinates = s.split(":");
+            SPAWN_LOCATIONS.add(new Location(ARENA_WORLD,
+                    Double.parseDouble(coordinates[0]), Double.parseDouble(coordinates[1]), Double.parseDouble(coordinates[2]),
+                    0, 0));
+        }
+
         ItemStack stack = new ItemStack(Material.getMaterial(configuration.getString("menu.material")));
         ItemMeta meta = stack.getItemMeta();
         meta.setDisplayName(replaceColor(configuration.getString("menu.name")));

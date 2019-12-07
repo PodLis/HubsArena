@@ -58,7 +58,9 @@ public class Commands implements CommandExecutor, TabCompleter {
                         return true;
                     }
 
+                    plugin.getArenaKeeper().savePlayers();
                     plugin.loadConfiguration();
+                    plugin.getArenaKeeper().loadPlayers();
 
                     sendPrefixMessage(sender, "Plugin reloaded.");
 
