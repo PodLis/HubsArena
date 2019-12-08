@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import ru.hubsmc.hubsarena.heroes.Archer;
 import ru.hubsmc.hubsarena.heroes.Hero;
 import ru.hubsmc.hubsarena.heroes.Knight;
+import ru.hubsmc.hubsarena.heroes.Pyro;
 import ru.hubsmc.hubsarena.util.PlayerUtils;
 
 import java.io.File;
@@ -27,7 +28,7 @@ public class ArenaKeeper {
         this.dataFileConfig = YamlConfiguration.loadConfiguration(dataFile);
     }
 
-    public enum Heroes {ARCHER, KNIGHT}
+    public enum Heroes {ARCHER, KNIGHT, PYRO}
 
     public void pickHero(Player player, Heroes heroes) {
         switch (heroes) {
@@ -37,6 +38,13 @@ public class ArenaKeeper {
             }
             case KNIGHT: {
                 heroMap.put(player, new Knight(player));
+                break;
+            }
+            case PYRO: {
+                heroMap.put(player, new Pyro(player));
+                break;
+            }
+            default: {
                 break;
             }
         }

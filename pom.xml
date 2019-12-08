@@ -74,11 +74,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>ru.hubsmc</groupId>
-            <artifactId>hubsvalues</artifactId>
+            <groupId>ru.hubsmc.hubsvalues</groupId>
+            <artifactId>HubsValues</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/HubsValues-1.0-SNAPSHOT.jar</systemPath>
+            <systemPath>F:/Minecraft/HubsValues/target/HubsValues-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

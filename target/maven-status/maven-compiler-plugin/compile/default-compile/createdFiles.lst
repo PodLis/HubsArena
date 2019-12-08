@@ -3,7 +3,9 @@ ru\hubsmc\hubsarena\event\LeaveEvent.class
 ru\hubsmc\hubsarena\Permissions.class
 ru\hubsmc\hubsarena\ArenaKeeper$1.class
 ru\hubsmc\hubsarena\Permissions$Perm.class
+ru\hubsmc\hubsarena\data\MiItems.class
 ru\hubsmc\hubsarena\ArenaKeeper$Heroes.class
+ru\hubsmc\hubsarena\heroes\Pyro.class
 ru\hubsmc\hubsarena\heroes\Archer.class
 ru\hubsmc\hubsarena\ArenaKeeper.class
 ru\hubsmc\hubsarena\util\ServerUtils.class

@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.logging.Level;
 
 import static ru.hubsmc.hubsarena.util.StringUtils.replaceColor;
-import static ru.hubsmc.hubsvalues.api.API.updateCustomPlaceholders;
 
 public class Commands implements CommandExecutor, TabCompleter {
 
@@ -77,7 +76,10 @@ public class Commands implements CommandExecutor, TabCompleter {
                                 sendPrefixMessage(sender, "Player must be online!");
                                 return true;
                             }
-                            plugin.getArenaKeeper().pickHero(player, ArenaKeeper.Heroes.valueOf("ARCHER"));
+
+                            if (args.length > 2) {
+                                plugin.getArenaKeeper().pickHero(player, ArenaKeeper.Heroes.valueOf(args[2].toUpperCase()));
+                            }
                             plugin.getArenaKeeper().sendPlayer(player);
 
                             return true;
@@ -115,6 +117,17 @@ public class Commands implements CommandExecutor, TabCompleter {
         if (args.length == 2) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 cmds.add(player.getName());
+            }
+            partOfCommand = args[1];
+
+            StringUtil.copyPartialMatches(partOfCommand, cmds, completionList);
+            Collections.sort(completionList);
+            return completionList;
+        }
+
+        if (args.length == 3 && args[0].equals("send")) {
+            for (ArenaKeeper.Heroes hero : ArenaKeeper.Heroes.values()) {
+                cmds.add(hero.toString().toLowerCase());
             }
             partOfCommand = args[1];
 

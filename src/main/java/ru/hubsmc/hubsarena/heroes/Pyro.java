@@ -3,13 +3,13 @@ package ru.hubsmc.hubsarena.heroes;
 import org.bukkit.entity.Player;
 import ru.hubsmc.hubsarena.ArenaKeeper;
 import ru.hubsmc.hubsarena.data.Effects;
-import ru.hubsmc.hubsarena.data.Items;
+import ru.hubsmc.hubsarena.data.MiItems;
 
-public class Knight extends Hero {
+public class Pyro extends Hero {
 
-    public Knight(Player player) {
+    public Pyro(Player player) {
         super(player);
-        setNames(ArenaKeeper.Heroes.KNIGHT, "Рыцарь", "Рыцаря");
+        setNames(ArenaKeeper.Heroes.PYRO, "Пиромант", "Пироманта");
         player.sendMessage("Ку здарова, я " + getName());
     }
 
@@ -21,7 +21,7 @@ public class Knight extends Hero {
     }
 
     private void getDressed() {
-        player.getInventory().setHelmet(Items.ARCHER_HELMET.getItemStack());
+        MiItems.PYRO_SWORD.giveToPlayer(player);
         player.updateInventory();
         player.addPotionEffect(Effects.NORMAL_SPEED.getPotionEffect());
     }
