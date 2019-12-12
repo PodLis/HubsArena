@@ -6,7 +6,8 @@ public class Permissions {
 
         HELP("hubsarena.help"),
         RELOAD("hubsarena.reload"),
-        SEND("hubsarena.send");
+        SEND("hubsarena.send"),
+        IGNORE_TABOOS("hubsarena.ignore-taboos");
 
         private final String perm;
 

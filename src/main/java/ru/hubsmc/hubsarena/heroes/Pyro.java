@@ -14,14 +14,14 @@ public class Pyro extends Hero {
     }
 
     @Override
-    public void joinTheArena() {
-        super.joinTheArena();
+    public void joinTheBattlefield() {
+        super.joinTheBattlefield();
         getDressed();
         player.setInvulnerable(false);
     }
 
     private void getDressed() {
-        MiItems.PYRO_SWORD.giveToPlayer(player);
+        player.getInventory().setItem(0, MiItems.PYRO_SWORD.getItemStack());
         player.updateInventory();
         player.addPotionEffect(Effects.NORMAL_SPEED.getPotionEffect());
     }

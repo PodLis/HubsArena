@@ -1,4 +1,5 @@
 ru\hubsmc\hubsarena\util\StringUtils.class
+ru\hubsmc\hubsarena\command\CommandGo.class
 ru\hubsmc\hubsarena\event\LeaveEvent.class
 ru\hubsmc\hubsarena\Permissions.class
 ru\hubsmc\hubsarena\ArenaKeeper$1.class
@@ -13,6 +14,7 @@ ru\hubsmc\hubsarena\heroes\Hero.class
 ru\hubsmc\hubsarena\data\Items.class
 ru\hubsmc\hubsarena\event\JoinEvent.class
 ru\hubsmc\hubsarena\util\PlayerUtils.class
+ru\hubsmc\hubsarena\event\MobKillEvent.class
 ru\hubsmc\hubsarena\HubsArena.class
 ru\hubsmc\hubsarena\Commands.class
 ru\hubsmc\hubsarena\data\Effects.class

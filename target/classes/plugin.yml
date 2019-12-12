@@ -12,6 +12,9 @@ commands:
     description: The main command for HubsArena
     usage: <command>
     aliases: [ha]
+  go:
+    description: Go-to-Arena command
+    usage: <command>
 
 permissions:
   hubsarena.*:
@@ -20,6 +23,7 @@ permissions:
       hubsarena.help: true
       hubsarena.reload: true
       hubsarena.send: true
+      hubsarena.ignore-taboos: true
   hubsarena.help:
     description: Display help message.
     default: false
@@ -28,4 +32,7 @@ permissions:
     default: false
   hubsarena.send:
     description: Send the player to battle.
+    default: false
+  hubsarena.ignore-taboos:
+    description: Allow to ignore all Arena taboos.
     default: false

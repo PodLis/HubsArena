@@ -6,8 +6,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import ru.hubsmc.hubsarena.command.CommandGo;
 import ru.hubsmc.hubsarena.event.JoinEvent;
 import ru.hubsmc.hubsarena.event.LeaveEvent;
+import ru.hubsmc.hubsarena.event.MobKillEvent;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,10 +43,15 @@ public final class HubsArena extends JavaPlugin {
 
             getServer().getPluginManager().registerEvents(new LeaveEvent(arenaKeeper), this);
             getServer().getPluginManager().registerEvents(new JoinEvent(arenaKeeper), this);
+            getServer().getPluginManager().registerEvents(new MobKillEvent(arenaKeeper), this);
 
             Commands commands = new Commands(this);
             getCommand("hubsarena").setExecutor(commands);
             getCommand("hubsarena").setTabCompleter(commands);
+
+            CommandGo commandGo = new CommandGo(this);
+            getCommand("go").setExecutor(commandGo);
+            getCommand("go").setTabCompleter(commandGo);
 
             logConsole("Successfully enabled.");
         } catch (Throwable e) {

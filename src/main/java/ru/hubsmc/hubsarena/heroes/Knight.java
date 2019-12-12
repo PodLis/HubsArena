@@ -14,8 +14,8 @@ public class Knight extends Hero {
     }
 
     @Override
-    public void joinTheArena() {
-        super.joinTheArena();
+    public void joinTheBattlefield() {
+        super.joinTheBattlefield();
         getDressed();
         player.setInvulnerable(false);
     }

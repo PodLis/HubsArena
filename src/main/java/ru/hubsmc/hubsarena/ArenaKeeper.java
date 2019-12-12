@@ -2,6 +2,7 @@ package ru.hubsmc.hubsarena;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import ru.hubsmc.hubsarena.heroes.Archer;
 import ru.hubsmc.hubsarena.heroes.Hero;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static ru.hubsmc.hubsvalues.api.API.addDollars;
 import static ru.hubsmc.hubsvalues.api.API.updateCustomPlaceholders;
 
 public class ArenaKeeper {
@@ -51,23 +53,54 @@ public class ArenaKeeper {
         updateCustomPlaceholders(player, heroMap.get(player).getName(), "", "", "");
     }
 
-    public void sendPlayer(Player player) {
-        heroMap.get(player).joinTheArena();
+    public void sendPlayerToBattlefield(Player player) {
+        heroMap.get(player).joinTheBattlefield();
     }
 
-    public void onPlayerJoin(Player player) {
+    // Need to realize
+    public boolean hasPlayerAccessToHero(Player player, Heroes hero) {
+        return true;
+    }
+
+    public boolean isPlayerInBattlefield(Player player) {
+        return heroMap.containsKey(player) && heroMap.get(player).isInBattle();
+    }
+
+    public void sendPlayerToLobby(Player player) {
+        if (isPlayerInBattlefield(player)) {
+            heroMap.get(player).leaveTheBattlefield();
+        }
         player.teleport(HubsArena.LOBBY_LOCATION);
         player.getInventory().clear();
         PlayerUtils.curePotionEffects(player);
         player.getInventory().setItem(0, HubsArena.ITEM_MENU);
+    }
+
+    public void onJoinToArena(Player player) {
+        sendPlayerToLobby(player);
         loadPlayer(player);
     }
+
+    // Need to fill
+    public void rewardPlayerForMobKill(Player player, EntityType type) {
+        switch (type) {
+            case ZOMBIE:
+                addDollars(player, 10);
+                return;
+            case HUSK:
+                addDollars(player, 20);
+                return;
+            case SKELETON:
+                addDollars(player, 25);
+        }
+    }
+
 
     public void loadPlayer(Player player) {
         if (dataFileConfig.contains(player.getUniqueId().toString())) {
             pickHero(player, Heroes.valueOf(dataFileConfig.getString(player.getUniqueId().toString())));
         } else {
-            pickHero(player, Heroes.ARCHER);
+            pickHero(player, Heroes.KNIGHT);
         }
     }
 

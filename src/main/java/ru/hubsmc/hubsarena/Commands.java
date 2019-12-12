@@ -71,19 +71,35 @@ public class Commands implements CommandExecutor, TabCompleter {
                                 return true;
                             }
 
-                            Player player = Bukkit.getPlayer(args[1]);
-                            if (player == null) {
+                            Player target = Bukkit.getPlayer(args[1]);
+                            if (target == null) {
                                 sendPrefixMessage(sender, "Player must be online!");
                                 return true;
                             }
 
                             if (args.length > 2) {
-                                plugin.getArenaKeeper().pickHero(player, ArenaKeeper.Heroes.valueOf(args[2].toUpperCase()));
+                                plugin.getArenaKeeper().pickHero(target, ArenaKeeper.Heroes.valueOf(args[2].toUpperCase()));
                             }
-                            plugin.getArenaKeeper().sendPlayer(player);
+                            plugin.getArenaKeeper().sendPlayerToBattlefield(target);
 
                             return true;
 
+
+                        case "lobby":
+                            if (!(sender instanceof Player)) {
+                                sendPrefixMessage(sender, "goer must be a player!");
+                                return true;
+                            }
+
+                            Player player = (Player) sender;
+
+                            if (!player.hasPermission(Permissions.Perm.SEND.getPerm())) {
+                                sendPrefixMessage(player, "You have no permissions to use&6 " + args[0]);
+                                return true;
+                            }
+
+                            plugin.getArenaKeeper().sendPlayerToLobby(player);
+                            return true;
 
                         default:
                             sendPrefixMessage(sender, "unknown sub-command&6 " + args[0]);
@@ -114,7 +130,7 @@ public class Commands implements CommandExecutor, TabCompleter {
             return completionList;
         }
 
-        if (args.length == 2) {
+        if (args.length == 2 && args[0].equals("send")) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 cmds.add(player.getName());
             }
@@ -127,9 +143,9 @@ public class Commands implements CommandExecutor, TabCompleter {
 
         if (args.length == 3 && args[0].equals("send")) {
             for (ArenaKeeper.Heroes hero : ArenaKeeper.Heroes.values()) {
-                cmds.add(hero.toString().toLowerCase());
+                cmds.add(hero.name().toLowerCase());
             }
-            partOfCommand = args[1];
+            partOfCommand = args[2];
 
             StringUtil.copyPartialMatches(partOfCommand, cmds, completionList);
             Collections.sort(completionList);
@@ -141,7 +157,7 @@ public class Commands implements CommandExecutor, TabCompleter {
 
     private List<String> getCmds(CommandSender sender) {
         List<String> c = new ArrayList<>();
-        for (String cmd : Arrays.asList("help", "reload", "send")) {
+        for (String cmd : Arrays.asList("help", "reload", "send", "lobby")) {
             if (!sender.hasPermission("hubsarena." + cmd)) {
                 continue;
             }

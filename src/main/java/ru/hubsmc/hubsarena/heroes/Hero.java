@@ -15,11 +15,15 @@ public abstract class Hero {
     private static String name;
     private static String altName;
 
+    private boolean inBattle;
+
     public Hero(Player player) {
         this.player = player;
+        this.inBattle = false;
     }
 
-    public void joinTheArena() {
+    public void joinTheBattlefield() {
+        inBattle = true;
         player.setInvulnerable(true);
         Location location = HubsArena.SPAWN_LOCATIONS.get( (int) (Math.random() * HubsArena.SPAWN_LOCATIONS.size()) );
         location.setYaw( (float) ((Math.random() * 360) - 180) );
@@ -45,6 +49,14 @@ public abstract class Hero {
 
     public ArenaKeeper.Heroes getHero() {
         return hero;
+    }
+
+    public boolean isInBattle() {
+        return inBattle;
+    }
+
+    public void leaveTheBattlefield() {
+        this.inBattle = false;
     }
 
 }

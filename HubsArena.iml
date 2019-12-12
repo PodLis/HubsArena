@@ -19,6 +19,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="MMOItems-5.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="HubsValues-1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.guava:guava:21.0" level="project" />
@@ -28,7 +30,16 @@
     <orderEntry type="module-library">
       <library name="Maven: ru.hubsmc.hubsvalues:HubsValues:1.0">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../HubsValues/target/HubsValues-1.0-SNAPSHOT.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/HubsValues-1.0-SNAPSHOT.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: net.Indyuce:MMOItems:5.1-SNAPSHOT">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/MMOItems-5.1-SNAPSHOT.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
