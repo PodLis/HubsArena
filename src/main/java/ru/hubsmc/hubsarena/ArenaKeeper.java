@@ -81,6 +81,10 @@ public class ArenaKeeper {
         loadPlayer(player);
     }
 
+    public Hero getHero(Player player) {
+        return heroMap.get(player);
+    }
+
     // Need to fill
     public void rewardPlayerForMobKill(Player player, EntityType type) {
         switch (type) {

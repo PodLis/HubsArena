@@ -20,6 +20,22 @@ public enum Items {
             Color.fromRGB(6192150),
             new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
             new int[]{2}
+    ),
+    TOSSER_WAND(
+            Material.BEETROOT_SEEDS,
+            "&lПодбрасывающий порошок",
+            null,
+            null,
+            null,
+            null
+    ),
+    HEALING_WAND(
+            Material.BEETROOT_SOUP,
+            "&lЦелебный супчик",
+            null,
+            null,
+            null,
+            null
     );
 
     private final ItemStack itemStack;
@@ -35,8 +51,10 @@ public enum Items {
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
 
-        for (int i = 0; i < enchantments.length; i++) {
-            itemMeta.addEnchant(enchantments[i], levels[i], true);
+        if (enchantments != null) {
+            for (int i = 0; i < enchantments.length; i++) {
+                itemMeta.addEnchant(enchantments[i], levels[i], true);
+            }
         }
 
         if ( material == Material.LEATHER_HELMET ||
@@ -54,6 +72,15 @@ public enum Items {
 
     public ItemStack getItemStack() {
         return itemStack;
+    }
+
+    public static Items getItemIfExist(ItemStack itemStack) {
+        for (Items item : Items.values()) {
+            if (item.itemStack.getType() == itemStack.getType()) {
+                return item;
+            }
+        }
+        return null;
     }
 
 }

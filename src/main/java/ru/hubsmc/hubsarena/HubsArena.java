@@ -7,9 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.hubsmc.hubsarena.command.CommandGo;
-import ru.hubsmc.hubsarena.event.JoinEvent;
-import ru.hubsmc.hubsarena.event.LeaveEvent;
-import ru.hubsmc.hubsarena.event.MobKillEvent;
+import ru.hubsmc.hubsarena.event.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -44,6 +42,8 @@ public final class HubsArena extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new LeaveEvent(arenaKeeper), this);
             getServer().getPluginManager().registerEvents(new JoinEvent(arenaKeeper), this);
             getServer().getPluginManager().registerEvents(new MobKillEvent(arenaKeeper), this);
+            getServer().getPluginManager().registerEvents(new ItemInteractEvent(arenaKeeper), this);
+            getServer().getPluginManager().registerEvents(new PlayerKillEvent(arenaKeeper), this);
 
             Commands commands = new Commands(this);
             getCommand("hubsarena").setExecutor(commands);
