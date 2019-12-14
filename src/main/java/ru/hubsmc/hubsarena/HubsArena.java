@@ -3,6 +3,7 @@ package ru.hubsmc.hubsarena;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,12 +12,17 @@ import ru.hubsmc.hubsarena.event.*;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 
 import static ru.hubsmc.hubsarena.util.StringUtils.replaceColor;
 
 public final class HubsArena extends JavaPlugin {
+
+    public List<Player> disabledFallDamagePlayers;
+
+    public static HubsArena instance;
 
     public static final String CHAT_PREFIX = ChatColor.DARK_GREEN + "[" + ChatColor.GREEN + "HA" + ChatColor.DARK_GREEN + "] " + ChatColor.GREEN;
 
@@ -34,6 +40,10 @@ public final class HubsArena extends JavaPlugin {
     @Override
     public void onEnable() {
 
+        this.disabledFallDamagePlayers = new LinkedList<>();
+
+        instance = this;
+
         loadConfiguration();
 
         try {
@@ -44,6 +54,7 @@ public final class HubsArena extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new MobKillEvent(arenaKeeper), this);
             getServer().getPluginManager().registerEvents(new ItemInteractEvent(arenaKeeper), this);
             getServer().getPluginManager().registerEvents(new PlayerKillEvent(arenaKeeper), this);
+            getServer().getPluginManager().registerEvents(new PlayerFallEvent(this), this);
 
             Commands commands = new Commands(this);
             getCommand("hubsarena").setExecutor(commands);
@@ -130,6 +141,10 @@ public final class HubsArena extends JavaPlugin {
 
     public void logConsole(Level level, String message) {
         Bukkit.getLogger().log(level, "[HubsArena] " + message);
+    }
+
+    public static HubsArena getInstance() {
+        return instance;
     }
 
 }

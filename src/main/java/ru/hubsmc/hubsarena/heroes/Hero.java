@@ -6,6 +6,8 @@ import ru.hubsmc.hubsarena.ArenaKeeper;
 import ru.hubsmc.hubsarena.HubsArena;
 import ru.hubsmc.hubsarena.data.Actions;
 import ru.hubsmc.hubsarena.data.Items;
+import ru.hubsmc.hubsarena.data.Particles;
+import ru.hubsmc.hubsarena.data.Sounds;
 import ru.hubsmc.hubsarena.util.PlayerUtils;
 import ru.hubsmc.hubsarena.util.ServerUtils;
 
@@ -13,9 +15,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import static ru.hubsmc.hubsvalues.api.API.takeMana;
+
 public abstract class Hero {
 
-    Player player;
+    protected Player player;
 
     private static ArenaKeeper.Heroes hero;
     private static String name;
@@ -31,43 +35,74 @@ public abstract class Hero {
     }
 
     public void joinTheBattlefield() {
-        inBattle = true;
         player.setInvulnerable(true);
+
+        inBattle = true;
+
         Location location = HubsArena.SPAWN_LOCATIONS.get( (int) (Math.random() * HubsArena.SPAWN_LOCATIONS.size()) );
         location.setYaw( (float) ((Math.random() * 360) - 180) );
-        PlayerUtils.curePotionEffects(player);
+        player.teleport(location);
+
+        PlayerUtils.spawnParticle(Particles.JOIN_PARTICLE, player);
+        ServerUtils.broadcastJoinMessage(player.getDisplayName(), name, altName);
+
+        getDressed();
+        player.updateInventory();
+
+        getBuffed();
+
+        player.setInvulnerable(false);
+    }
+
+    protected void getDressed() {
         player.getInventory().clear();
         player.getInventory().setItem(7, Items.TOSSER_WAND.getItemStack());
         player.getInventory().setItem(8, Items.HEALING_WAND.getItemStack());
-        player.teleport(location);
-        ServerUtils.broadcastJoinMessage(player.getDisplayName(), name, altName);
+    }
+
+    protected void getBuffed() {
+        PlayerUtils.curePotionEffects(player);
     }
 
     public void useSpell(Actions action) {
+
         int currentDelay = spellCooldown(action);
         if (currentDelay > 0) {
             player.sendMessage("Подождите ещё " + currentDelay + " секунд");
             return;
         }
+
+        if (action.getManaCost() > 0 && takeMana(player, action.getManaCost()) == 0) {
+            player.sendMessage("Недостаточно маны!");
+            return;
+        }
+
+        cooldowns.put(action, System.currentTimeMillis());
+
         switch (action) {
             case TOSS:
+                HubsArena.getInstance().disabledFallDamagePlayers.add(player);
                 player.setVelocity(player.getLocation().getDirection().multiply(5).setY(2));
+                PlayerUtils.spawnParticle(Particles.TOSS_PARTICLE, player);
+                PlayerUtils.playSound(Sounds.TOSS_SOUND, player);
                 break;
             case HEAL:
                 player.setHealth(player.getMaxHealth());
+                PlayerUtils.spawnParticle(Particles.TEST_REDSTONE_PARTICLE, player);
+                PlayerUtils.playSound(Sounds.HEAL_SOUND, player);
                 break;
         }
-        cooldowns.put(action, System.currentTimeMillis());
+
     }
 
-    int spellCooldown(Actions action) {
+    private int spellCooldown(Actions action) {
         if (cooldowns.containsKey(action)) {
             return (int) TimeUnit.MILLISECONDS.toSeconds(cooldowns.get(action) + action.getCooldownInTicks() * 50 - System.currentTimeMillis());
         }
         return 0;
     }
 
-    static void setNames(ArenaKeeper.Heroes hero, String name, String altName) {
+    protected static void setNames(ArenaKeeper.Heroes hero, String name, String altName) {
         Hero.hero = hero;
         Hero.name = name;
         Hero.altName = altName;

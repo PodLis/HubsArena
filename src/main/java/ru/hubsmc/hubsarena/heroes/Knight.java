@@ -2,28 +2,36 @@ package ru.hubsmc.hubsarena.heroes;
 
 import org.bukkit.entity.Player;
 import ru.hubsmc.hubsarena.ArenaKeeper;
-import ru.hubsmc.hubsarena.data.Effects;
-import ru.hubsmc.hubsarena.data.Items;
+import ru.hubsmc.hubsarena.data.Actions;
 
 public class Knight extends Hero {
 
+    static {
+        setNames(ArenaKeeper.Heroes.KNIGHT, "Рыцарь", "Рыцаря");
+    }
+
     public Knight(Player player) {
         super(player);
-        setNames(ArenaKeeper.Heroes.KNIGHT, "Рыцарь", "Рыцаря");
-        player.sendMessage("Ку здарова, я " + getName());
     }
 
     @Override
-    public void joinTheBattlefield() {
-        super.joinTheBattlefield();
-        getDressed();
-        player.setInvulnerable(false);
+    protected void getDressed() {
+        super.getDressed();
     }
 
-    private void getDressed() {
-        player.getInventory().setHelmet(Items.ARCHER_HELMET.getItemStack());
-        player.updateInventory();
-        player.addPotionEffect(Effects.NORMAL_SPEED.getPotionEffect());
+    @Override
+    protected void getBuffed() {
+        super.getBuffed();
+    }
+
+    @Override
+    public void useSpell(Actions action) {
+        super.useSpell(action);
+
+        switch (action) {
+
+        }
+
     }
 
 }
