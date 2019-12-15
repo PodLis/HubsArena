@@ -43,7 +43,7 @@ public abstract class Hero {
         location.setYaw( (float) ((Math.random() * 360) - 180) );
         player.teleport(location);
 
-        PlayerUtils.spawnParticle(Particles.JOIN_PARTICLE, player);
+        PlayerUtils.spawnParticle(Particles.TEST_NORMAL_PARTICLE, player);
         ServerUtils.broadcastJoinMessage(player.getDisplayName(), name, altName);
 
         getDressed();

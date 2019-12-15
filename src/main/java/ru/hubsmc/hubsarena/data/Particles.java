@@ -2,62 +2,83 @@ package ru.hubsmc.hubsarena.data;
 
 import org.bukkit.*;
 import org.bukkit.inventory.ItemStack;
+import ru.hubsmc.hubsarena.HubsArena;
 
 public enum Particles {
 
     TOSS_PARTICLE(
-            Particle.CAMPFIRE_SIGNAL_SMOKE, 0, 0, 0,
+            Particle.CAMPFIRE_SIGNAL_SMOKE,
+            0, 0, 0,
+            1, 1, 1,
             10, false, 0
     ),
     HEAL_PARTICLE(
-            Particle.HEART, 0, 0, 0,
+            0, 0, 0,
+            1, 1, 1,
+            Color.fromRGB(0, 255, 0), 3,
             10, false, 0
     ),
     JOIN_PARTICLE(
-            Particle.DRAGON_BREATH, 0, 2, 0,
+            Particle.DRAGON_BREATH,
+            0, 2, 0,
+            1, 1, 1,
             10, true, 0
     ),
 
 
+    TEST_NORMAL_PARTICLE(
+            Particle.valueOf(HubsArena.getStringConfigData("particles.TEST_NORMAL_PARTICLE.particle")),
+            HubsArena.getDoubleConfigData("particles.TEST_NORMAL_PARTICLE.offsetX"), HubsArena.getDoubleConfigData("particles.TEST_NORMAL_PARTICLE.offsetY"), HubsArena.getDoubleConfigData("particles.TEST_NORMAL_PARTICLE.offsetZ"),
+            HubsArena.getDoubleConfigData("particles.TEST_NORMAL_PARTICLE.spreadX"), HubsArena.getDoubleConfigData("particles.TEST_NORMAL_PARTICLE.spreadY"), HubsArena.getDoubleConfigData("particles.TEST_NORMAL_PARTICLE.spreadZ"),
+            HubsArena.getIntConfigData("particles.TEST_NORMAL_PARTICLE.count"), HubsArena.getBooleanConfigData("particles.TEST_NORMAL_PARTICLE.force"), HubsArena.getIntConfigData("particles.TEST_NORMAL_PARTICLE.repeatTicks")
+    ),
     TEST_DIRECTIONAL_PARTICLE(
-            Particle.SMOKE_LARGE, 0, 0, 0,
-            0, 0, 0, 1,
-            10, false, 0
+            Particle.valueOf(HubsArena.getStringConfigData("particles.TEST_DIRECTIONAL_PARTICLE.particle")),
+            HubsArena.getDoubleConfigData("particles.TEST_DIRECTIONAL_PARTICLE.offsetX1"), HubsArena.getDoubleConfigData("particles.TEST_DIRECTIONAL_PARTICLE.offsetY1"), HubsArena.getDoubleConfigData("particles.TEST_DIRECTIONAL_PARTICLE.offsetZ1"),
+            HubsArena.getDoubleConfigData("particles.TEST_DIRECTIONAL_PARTICLE.offsetX2"), HubsArena.getDoubleConfigData("particles.TEST_DIRECTIONAL_PARTICLE.offsetY2"), HubsArena.getDoubleConfigData("particles.TEST_DIRECTIONAL_PARTICLE.offsetZ2"),
+            HubsArena.getDoubleConfigData("particles.TEST_DIRECTIONAL_PARTICLE.speed"),
+            HubsArena.getIntConfigData("particles.TEST_DIRECTIONAL_PARTICLE.count"), HubsArena.getBooleanConfigData("particles.TEST_DIRECTIONAL_PARTICLE.force"), HubsArena.getIntConfigData("particles.TEST_DIRECTIONAL_PARTICLE.repeatTicks")
     ),
     TEST_REDSTONE_PARTICLE(
-            0, 0, 0,
-            Color.fromRGB(0, 255, 0), 3,
-            10, false, 0
+            HubsArena.getDoubleConfigData("particles.TEST_REDSTONE_PARTICLE.offsetX"), HubsArena.getDoubleConfigData("particles.TEST_REDSTONE_PARTICLE.offsetY"), HubsArena.getDoubleConfigData("particles.TEST_REDSTONE_PARTICLE.offsetZ"),
+            HubsArena.getDoubleConfigData("particles.TEST_REDSTONE_PARTICLE.spreadX"), HubsArena.getDoubleConfigData("particles.TEST_REDSTONE_PARTICLE.spreadY"), HubsArena.getDoubleConfigData("particles.TEST_REDSTONE_PARTICLE.spreadZ"),
+            Color.fromRGB(HubsArena.getIntConfigData("particles.TEST_REDSTONE_PARTICLE.red"), HubsArena.getIntConfigData("particles.TEST_REDSTONE_PARTICLE.green"), HubsArena.getIntConfigData("particles.TEST_REDSTONE_PARTICLE.blue")), (float) HubsArena.getDoubleConfigData("particles.TEST_REDSTONE_PARTICLE.size"),
+            HubsArena.getIntConfigData("particles.TEST_REDSTONE_PARTICLE.count"), HubsArena.getBooleanConfigData("particles.TEST_REDSTONE_PARTICLE.force"), HubsArena.getIntConfigData("particles.TEST_REDSTONE_PARTICLE.repeatTicks")
     ),
     TEST_SPELL_MOB_PARTICLE(
-            Particle.SPELL_MOB, 0, 0, 0,
-            Color.fromRGB(0, 0, 255), 1,
-            10, false, 0
+            Particle.valueOf(HubsArena.getStringConfigData("particles.TEST_SPELL_MOB_PARTICLE.particle")),
+            HubsArena.getDoubleConfigData("particles.TEST_SPELL_MOB_PARTICLE.offsetX"), HubsArena.getDoubleConfigData("particles.TEST_SPELL_MOB_PARTICLE.offsetY"), HubsArena.getDoubleConfigData("particles.TEST_SPELL_MOB_PARTICLE.offsetZ"),
+            Color.fromRGB(HubsArena.getIntConfigData("particles.TEST_SPELL_MOB_PARTICLE.red"), HubsArena.getIntConfigData("particles.TEST_SPELL_MOB_PARTICLE.green"), HubsArena.getIntConfigData("particles.TEST_SPELL_MOB_PARTICLE.blue")), HubsArena.getDoubleConfigData("particles.TEST_SPELL_MOB_PARTICLE.randomColorCoefficient"),
+            HubsArena.getIntConfigData("particles.TEST_SPELL_MOB_PARTICLE.count"), HubsArena.getBooleanConfigData("particles.TEST_SPELL_MOB_PARTICLE.force"), HubsArena.getIntConfigData("particles.TEST_SPELL_MOB_PARTICLE.repeatTicks")
     ),
     TEST_NOTE_PARTICLE(
-            0, 0, 0,
-            5,
-            10, false, 0
+            HubsArena.getDoubleConfigData("particles.TEST_NOTE_PARTICLE.offsetX"), HubsArena.getDoubleConfigData("particles.TEST_NOTE_PARTICLE.offsetY"), HubsArena.getDoubleConfigData("particles.TEST_NOTE_PARTICLE.offsetZ"),
+            HubsArena.getIntConfigData("particles.TEST_NOTE_PARTICLE.colorID"),
+            HubsArena.getIntConfigData("particles.TEST_NOTE_PARTICLE.count"), HubsArena.getBooleanConfigData("particles.TEST_NOTE_PARTICLE.force"), HubsArena.getIntConfigData("particles.TEST_NOTE_PARTICLE.repeatTicks")
     ),
     TEST_ITEM_PARTICLE(
-            Particle.ITEM_CRACK, 0, 0, 0,
-            Material.BEEF,
-            10, false, 0
+            Particle.valueOf(HubsArena.getStringConfigData("particles.TEST_ITEM_PARTICLE.particle")),
+            HubsArena.getDoubleConfigData("particles.TEST_ITEM_PARTICLE.offsetX"), HubsArena.getDoubleConfigData("particles.TEST_ITEM_PARTICLE.offsetY"), HubsArena.getDoubleConfigData("particles.TEST_ITEM_PARTICLE.offsetZ"),
+            HubsArena.getDoubleConfigData("particles.TEST_ITEM_PARTICLE.spreadX"), HubsArena.getDoubleConfigData("particles.TEST_ITEM_PARTICLE.spreadY"), HubsArena.getDoubleConfigData("particles.TEST_ITEM_PARTICLE.spreadZ"),
+            Material.getMaterial(HubsArena.getStringConfigData("particles.TEST_ITEM_PARTICLE.material")),
+            HubsArena.getIntConfigData("particles.TEST_ITEM_PARTICLE.count"), HubsArena.getBooleanConfigData("particles.TEST_ITEM_PARTICLE.force"), HubsArena.getIntConfigData("particles.TEST_ITEM_PARTICLE.repeatTicks")
     ),
     TEST_BLOCK_PARTICLE(
-            Particle.FALLING_DUST, 0, 0, 0,
-            Material.SAND,
-            10, false, 0
+            Particle.valueOf(HubsArena.getStringConfigData("particles.TEST_BLOCK_PARTICLE.particle")),
+            HubsArena.getDoubleConfigData("particles.TEST_BLOCK_PARTICLE.offsetX"), HubsArena.getDoubleConfigData("particles.TEST_BLOCK_PARTICLE.offsetY"), HubsArena.getDoubleConfigData("particles.TEST_BLOCK_PARTICLE.offsetZ"),
+            HubsArena.getDoubleConfigData("particles.TEST_BLOCK_PARTICLE.spreadX"), HubsArena.getDoubleConfigData("particles.TEST_BLOCK_PARTICLE.spreadY"), HubsArena.getDoubleConfigData("particles.TEST_BLOCK_PARTICLE.spreadZ"),
+            Material.getMaterial(HubsArena.getStringConfigData("particles.TEST_BLOCK_PARTICLE.material")),
+            HubsArena.getIntConfigData("particles.TEST_BLOCK_PARTICLE.count"), HubsArena.getBooleanConfigData("particles.TEST_BLOCK_PARTICLE.force"), HubsArena.getIntConfigData("particles.TEST_BLOCK_PARTICLE.repeatTicks")
     );
 
     private Particle particle;
-    private double x;
-    private double y;
-    private double z;
+    private double offsetX;
+    private double offsetY;
+    private double offsetZ;
     private int count = 0;
-    private double s1 = 1;
-    private double s2 = 1;
-    private double s3 = 1;
+    private double s1;
+    private double s2;
+    private double s3;
     private double extra = 1;
     private Object data = null;
     private boolean force;
@@ -67,11 +88,17 @@ public enum Particles {
     //
     // Absolutely normal particles constructor
     //
-    Particles(Particle particle, double x, double y, double z, int count, boolean force, int repeatTicks) {
+    Particles(Particle particle,
+              double offsetX, double offsetY, double offsetZ,
+              double spreadX, double spreadY, double spreadZ,
+              int count, boolean force, int repeatTicks) {
         this.particle = particle;
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+        this.offsetZ = offsetZ;
+        this.s1 = spreadX;
+        this.s2 = spreadY;
+        this.s3 = spreadZ;
         this.count = count;
         this.force = force;
         this.repeatTicks = repeatTicks;
@@ -80,14 +107,19 @@ public enum Particles {
     //
     // Directional particles constructor
     //
-    Particles(Particle particle, double x, double y, double z, double x1, double y1, double z1, double speed, int count, boolean force, int repeatTicks) {
+    Particles(Particle particle,
+              double offsetX1, double offsetY1, double offsetZ1,
+              double offsetX2, double offsetY2, double offsetZ2,
+              double speed,
+              int count, boolean force, int repeatTicks) {
+
         this.particle = particle;
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.s1 = x1;
-        this.s2 = y1;
-        this.s3 = z1;
+        this.offsetX = offsetX1;
+        this.offsetY = offsetY1;
+        this.offsetZ = offsetZ1;
+        this.s1 = offsetX2;
+        this.s2 = offsetY2;
+        this.s3 = offsetZ2;
         this.extra = speed;
         this.force = force;
         this.outCount = count;
@@ -97,11 +129,19 @@ public enum Particles {
     // Redstone particles constructor
     //
     // possible particle type: REDSTONE
-    Particles(double x, double y, double z, Color color, float size, int count, boolean force, int repeatTicks) {
+    Particles(
+            double offsetX, double offsetY, double offsetZ,
+            double spreadX, double spreadY, double spreadZ,
+            Color color, float size,
+            int count, boolean force, int repeatTicks) {
+
         this.particle = Particle.REDSTONE;
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+        this.offsetZ = offsetZ;
+        this.s1 = spreadX;
+        this.s2 = spreadY;
+        this.s3 = spreadZ;
         this.count = count;
         this.data = new Particle.DustOptions(color, size);
         this.force = force;
@@ -111,11 +151,15 @@ public enum Particles {
     // Spell mob particles constructor
     //
     // possible particle types: SPELL_MOB, SPELL_MOB_AMBIENT
-    Particles(Particle particle, double x, double y, double z, Color color, double randomColorCoefficient, int count, boolean force, int repeatTicks) {
+    Particles(Particle particle,
+              double offsetX, double offsetY, double offsetZ,
+              Color color, double randomColorCoefficient,
+              int count, boolean force, int repeatTicks) {
+
         this.particle = particle;
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+        this.offsetZ = offsetZ;
         this.s1 = color.getRed() / 255D;
         this.s2 = color.getGreen() / 255D;
         this.s3 = color.getBlue() / 255D;
@@ -128,12 +172,18 @@ public enum Particles {
     // Note particles constructor
     //
     // possible particle type: NOTE
-    Particles(double x, double y, double z, int colorID, int count, boolean force, int repeatTicks) {
+    Particles(
+            double offsetX, double offsetY, double offsetZ,
+            int colorID,
+            int count, boolean force, int repeatTicks) {
+
         this.particle = Particle.NOTE;
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+        this.offsetZ = offsetZ;
         this.s1 = colorID / 24D;
+        this.s2 = 0;
+        this.s3 = 0;
         this.force = force;
         this.outCount = count;
         this.repeatTicks = repeatTicks;
@@ -142,11 +192,19 @@ public enum Particles {
     // Item/Block particles constructor
     //
     // possible particle types: ITEM_CRACK, BLOCK_CRACK, BLOCK_DUST, FALLING_DUST
-    Particles(Particle particle, double x, double y, double z, Material material, int count, boolean force, int repeatTicks) {
+    Particles(Particle particle,
+              double offsetX, double offsetY, double offsetZ,
+              double spreadX, double spreadY, double spreadZ,
+              Material material,
+              int count, boolean force, int repeatTicks) {
+
         this.particle = particle;
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+        this.offsetZ = offsetZ;
+        this.s1 = spreadX;
+        this.s2 = spreadY;
+        this.s3 = spreadZ;
         this.count = count;
         if (particle == Particle.ITEM_CRACK) {
             this.data = new ItemStack(material);
@@ -161,16 +219,16 @@ public enum Particles {
         return particle;
     }
 
-    public double getX() {
-        return x;
+    public double getOffsetX() {
+        return offsetX;
     }
 
-    public double getY() {
-        return y;
+    public double getOffsetY() {
+        return offsetY;
     }
 
-    public double getZ() {
-        return z;
+    public double getOffsetZ() {
+        return offsetZ;
     }
 
     public int getCount() {

@@ -1,11 +1,24 @@
 package ru.hubsmc.hubsarena.data;
 
 import org.bukkit.event.inventory.ClickType;
+import ru.hubsmc.hubsarena.HubsArena;
 
 public enum Actions {
 
     TOSS(ClickType.RIGHT, Items.TOSSER_WAND, 80, 2),
-    HEAL(ClickType.RIGHT, Items.HEALING_WAND, 80, 4);
+    HEAL(ClickType.RIGHT, Items.HEALING_WAND, 80, 4),
+    FIRST_TEST_ACTION(
+            ClickType.valueOf(HubsArena.getStringConfigData("actions.FIRST_TEST_ACTION.clickType")),
+            Items.valueOf(HubsArena.getStringConfigData("actions.FIRST_TEST_ACTION.item")),
+            HubsArena.getIntConfigData("actions.FIRST_TEST_ACTION.cooldownInTicks"),
+            HubsArena.getIntConfigData("actions.FIRST_TEST_ACTION.manaCost")
+    ),
+    SECOND_TEST_ACTION(
+            ClickType.valueOf(HubsArena.getStringConfigData("actions.FIRST_TEST_ACTION.clickType")),
+            Items.valueOf(HubsArena.getStringConfigData("actions.FIRST_TEST_ACTION.item")),
+            HubsArena.getIntConfigData("actions.FIRST_TEST_ACTION.cooldownInTicks"),
+            HubsArena.getIntConfigData("actions.FIRST_TEST_ACTION.manaCost")
+    );
 
     private ClickType clickType;
     private Items item;

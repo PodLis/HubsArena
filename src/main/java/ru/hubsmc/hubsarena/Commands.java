@@ -7,6 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
+import ru.hubsmc.hubsarena.data.*;
+import ru.hubsmc.hubsarena.util.PlayerUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -101,6 +103,44 @@ public class Commands implements CommandExecutor, TabCompleter {
                             plugin.getArenaKeeper().sendPlayerToLobby(player);
                             return true;
 
+                        case "test":
+                            if (!(sender instanceof Player)) {
+                                sendPrefixMessage(sender, "goer must be a player!");
+                                return true;
+                            }
+
+                            Player player1 = (Player) sender;
+
+                            if (!player1.hasPermission(Permissions.Perm.SEND.getPerm())) {
+                                sendPrefixMessage(player1, "You have no permissions to use&6 " + args[0]);
+                                return true;
+                            }
+
+                            if (args.length < 3) {
+                                sendPrefixMessage(sender, "Not enough arguments!");
+                                return true;
+                            }
+
+                            switch (args[1].toLowerCase()) {
+                                case "particles":
+                                    PlayerUtils.spawnParticle(Particles.valueOf(args[2].toUpperCase()), player1);
+                                    return true;
+                                case "sounds":
+                                    PlayerUtils.playSound(Sounds.valueOf(args[2].toUpperCase()), player1);
+                                    return true;
+                                case "items":
+                                    player1.getInventory().addItem(Items.valueOf(args[2].toUpperCase()).getItemStack());
+                                    return true;
+                                case "miitems":
+                                    player1.getInventory().addItem(MiItems.valueOf(args[2].toUpperCase()).getItemStack());
+                                    return true;
+                                case "effects":
+                                    player1.addPotionEffect(PotionEffects.valueOf(args[2].toUpperCase()).getPotionEffect());
+                                    return true;
+                            }
+
+                            return true;
+
                         default:
                             sendPrefixMessage(sender, "unknown sub-command&6 " + args[0]);
                             return true;
@@ -121,43 +161,71 @@ public class Commands implements CommandExecutor, TabCompleter {
         String partOfCommand;
         List<String> cmds = new ArrayList<>();
 
-        if (args.length == 1) {
-            cmds = new ArrayList<>(getCmds(sender));
-            partOfCommand = args[0];
+        switch (args.length) {
+            case 1:
 
-            StringUtil.copyPartialMatches(partOfCommand, cmds, completionList);
-            Collections.sort(completionList);
-            return completionList;
+                cmds = new ArrayList<>(getCmds(sender));
+                partOfCommand = args[0];
+
+                StringUtil.copyPartialMatches(partOfCommand, cmds, completionList);
+                Collections.sort(completionList);
+                return completionList;
+
+            case 2:
+                switch (args[0]) {
+                    case "send":
+                        for (Player player : Bukkit.getOnlinePlayers()) {
+                            cmds.add(player.getName());
+                        }
+                        partOfCommand = args[1];
+
+                        StringUtil.copyPartialMatches(partOfCommand, cmds, completionList);
+                        Collections.sort(completionList);
+                        return completionList;
+
+                    case "test":
+                        cmds.addAll(Arrays.asList("particles", "sounds", "items", "miItems", "effects"));
+                        partOfCommand = args[1];
+                        StringUtil.copyPartialMatches(partOfCommand, cmds, completionList);
+                        Collections.sort(completionList);
+                        return completionList;
+
+                    default:
+                        return null;
+                }
+
+            case 3:
+                switch (args[0]) {
+                    case "send":
+                        for (ArenaKeeper.Heroes hero : ArenaKeeper.Heroes.values()) {
+                            cmds.add(hero.name().toLowerCase());
+                        }
+                        partOfCommand = args[2];
+
+                        StringUtil.copyPartialMatches(partOfCommand, cmds, completionList);
+                        Collections.sort(completionList);
+                        return completionList;
+
+                    case "test":
+                        cmds.addAll(HubsArena.getKeySetConfigData(args[1].toLowerCase()));
+                        partOfCommand = args[2];
+
+                        StringUtil.copyPartialMatches(partOfCommand, cmds, completionList);
+                        Collections.sort(completionList);
+                        return completionList;
+
+                    default:
+                        return null;
+                }
+
+            default:
+                return null;
         }
-
-        if (args.length == 2 && args[0].equals("send")) {
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                cmds.add(player.getName());
-            }
-            partOfCommand = args[1];
-
-            StringUtil.copyPartialMatches(partOfCommand, cmds, completionList);
-            Collections.sort(completionList);
-            return completionList;
-        }
-
-        if (args.length == 3 && args[0].equals("send")) {
-            for (ArenaKeeper.Heroes hero : ArenaKeeper.Heroes.values()) {
-                cmds.add(hero.name().toLowerCase());
-            }
-            partOfCommand = args[2];
-
-            StringUtil.copyPartialMatches(partOfCommand, cmds, completionList);
-            Collections.sort(completionList);
-            return completionList;
-        }
-
-        return null;
     }
 
     private List<String> getCmds(CommandSender sender) {
         List<String> c = new ArrayList<>();
-        for (String cmd : Arrays.asList("help", "reload", "send", "lobby")) {
+        for (String cmd : Arrays.asList("help", "reload", "send", "lobby", "test")) {
             if (!sender.hasPermission("hubsarena." + cmd)) {
                 continue;
             }

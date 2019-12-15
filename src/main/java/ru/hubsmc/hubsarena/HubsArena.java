@@ -11,18 +11,18 @@ import ru.hubsmc.hubsarena.command.CommandGo;
 import ru.hubsmc.hubsarena.event.*;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 
 import static ru.hubsmc.hubsarena.util.StringUtils.replaceColor;
 
 public final class HubsArena extends JavaPlugin {
 
+    // temporary solution
     public List<Player> disabledFallDamagePlayers;
 
-    public static HubsArena instance;
+    // temporary solution
+    private static HubsArena instance;
 
     public static final String CHAT_PREFIX = ChatColor.DARK_GREEN + "[" + ChatColor.GREEN + "HA" + ChatColor.DARK_GREEN + "] " + ChatColor.GREEN;
 
@@ -34,14 +34,15 @@ public final class HubsArena extends JavaPlugin {
 
     private ArenaKeeper arenaKeeper;
 
-    private FileConfiguration configuration;
-    private File configFile;
+    private static FileConfiguration configuration;
+    private static File configFile;
 
     @Override
     public void onEnable() {
 
         this.disabledFallDamagePlayers = new LinkedList<>();
 
+        // temporary solution
         instance = this;
 
         loadConfiguration();
@@ -77,6 +78,47 @@ public final class HubsArena extends JavaPlugin {
 
     public ArenaKeeper getArenaKeeper() {
         return arenaKeeper;
+    }
+
+    // temporary solutions
+    public static boolean getBooleanConfigData(String path) {
+        if (configuration.contains(path)) {
+            return configuration.getBoolean(path);
+        }
+        return false;
+    }
+    public static int getIntConfigData(String path) {
+        if (configuration.contains(path)) {
+            return configuration.getInt(path);
+        }
+        return 0;
+    }
+    public static double getDoubleConfigData(String path) {
+        if (configuration.contains(path)) {
+            return configuration.getDouble(path);
+        }
+        return 0;
+    }
+    public static String getStringConfigData(String path) {
+        if (configuration.contains(path)) {
+            return configuration.getString(path);
+        }
+        return "";
+    }
+    public static List<String> getStringListConfigData(String path) {
+        if (configuration.contains(path)) {
+            return configuration.getStringList(path);
+        }
+        return null;
+    }
+    public static List<Integer> getIntegerListConfigData(String path) {
+        if (configuration.contains(path)) {
+            return configuration.getIntegerList(path);
+        }
+        return null;
+    }
+    public static Set<String> getKeySetConfigData(String path) {
+        return configuration.getConfigurationSection(path).getKeys(false);
     }
 
     void loadConfiguration() {
@@ -143,6 +185,7 @@ public final class HubsArena extends JavaPlugin {
         Bukkit.getLogger().log(level, "[HubsArena] " + message);
     }
 
+    // temporary solution
     public static HubsArena getInstance() {
         return instance;
     }

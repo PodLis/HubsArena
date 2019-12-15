@@ -26,7 +26,7 @@ public class PlayerUtils {
         for (int i = 0; i < particle.getOutCount(); i++) {
             player.getWorld().spawnParticle(
                     particle.getParticle(),
-                    player.getLocation().add( particle.getX(), particle.getY(), particle.getZ() ),
+                    player.getLocation().add( particle.getOffsetX(), particle.getOffsetY(), particle.getOffsetZ() ),
                     particle.getCount(),
                     particle.getS1(),
                     particle.getS2(),
@@ -40,7 +40,7 @@ public class PlayerUtils {
 
     public static void playSound(Sounds sound, Player player) {
         player.getWorld().playSound(
-                player.getLocation().add( sound.getX(), sound.getY(), sound.getZ() ),
+                player.getLocation().add( sound.getOffsetX(), sound.getOffsetY(), sound.getOffsetZ() ),
                 sound.getSound(),
                 sound.getVolume(),
                 sound.getPitch()
