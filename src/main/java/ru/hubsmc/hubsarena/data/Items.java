@@ -14,15 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Items {
-
-    ARCHER_HELMET(
-            Material.LEATHER_HELMET,
-            "&lШляпа лучника",
-            null,
-            Color.fromRGB(6192150),
-            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
-            new int[]{2}
-    ),
+    /*
+     *  Common items
+     */
     TOSSER_WAND(
             Material.BEETROOT_SEEDS,
             "&lПодбрасывающий порошок",
@@ -31,6 +25,7 @@ public enum Items {
             null,
             null
     ),
+
     HEALING_WAND(
             Material.BEETROOT_SOUP,
             "&lЦелебный супчик",
@@ -39,6 +34,197 @@ public enum Items {
             null,
             null
     ),
+
+    /*
+     *  Archer kit:
+     *  - Armor
+     *  - Bow
+     *  - Arrow x1
+     */
+    ARCHER_HELMET(
+            Material.LEATHER_HELMET,
+            "&lШляпа лучника",
+            new String[]{
+                    "&5Остерегайся попаданий в голову!",
+                    "&5Это просто зеленая шляпа!"
+            },
+            Color.fromRGB(6192150),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    ARCHER_CHESTPLATE(
+            Material.LEATHER_CHESTPLATE,
+            "&lРубашка лучника",
+            new String[]{
+                    "&5Это не совсем броня, но смотрится красиво!"
+            },
+            Color.fromRGB(6192150),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    ARCHER_PANTS(
+            Material.LEATHER_LEGGINGS,
+            "&lШтаны лучника",
+            new String[]{
+                    "&5Боевые штанишки!"
+            },
+            Color.fromRGB(6192150),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    ARCHER_BOOTS(
+            Material.LEATHER_BOOTS,
+            "&lСапоги лучника",
+            new String[]{
+                    "&5Ну, по ногам то редко прилетает...",
+                    "&5Так что мы выдали вам простые ботинки."
+            },
+            Color.fromRGB(6192150),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    ARCHER_ARROW(
+            Material.ARROW,
+            "&lСтрела",
+            null,
+            null,
+            new Enchantment[]{},
+            new int[]{}
+    ),
+
+    /*
+     *  Heavy kit:
+     *  - Armor
+     *  - Sword
+     *  - Shield
+     */
+    KNIGHT_HELMET(
+            Material.IRON_HELMET,
+            "&lШлем",
+            new String[]{
+                    "&5Береги голову!"
+            },
+            null,
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    KNIGHT_CHESTPLATE(
+            Material.IRON_CHESTPLATE,
+            "&lНагрудник",
+            new String[]{
+                    "&lТупо броня!"
+            },
+            null,
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    KNIGHT_PANTS(
+            Material.IRON_LEGGINGS,
+            "Штаны",
+            new String[]{
+                    "&lВ них конечно же не побегаешь...",
+                    "&lНо за жопу точно не страшно!"
+            },
+            null,
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    KNIGHT_BOOTS(
+            Material.IRON_BOOTS,
+            "&lСапоги",
+            new String[]{
+                    "&5Таким тапком не только таракана убить можно..."
+            },
+            null,
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    KNIGHT_SWORD(
+            Material.IRON_SWORD,
+            "&lТяжеленный меч!",
+            new String[]{
+                    "&5Таким по лбу лучше лишний раз не получать..."
+            },
+            null,
+            new Enchantment[]{Enchantment.DAMAGE_ALL, Enchantment.KNOCKBACK},
+            new int[]{4, 2}
+    ),
+
+    KNIGHT_SHIELD(
+            Material.SHIELD,
+            "&lБашенный щит",
+            new String[]{
+                    "&5Идеальный стрелоприемник!"
+            },
+            null,
+            new Enchantment[]{},
+            new int[]{}
+    ),
+
+    /*
+     *  Pyro kit:
+     *  - Armor
+     *  - Sword
+     */
+    PYRO_HELMET(
+            Material.LEATHER_HELMET,
+            "&lШляпа пироманта",
+            new String[]{
+                    "&5В огне не горит!",
+                    "&5В воде... А, не. В воде тонет..."
+            },
+            Color.fromRGB(0xFF7E00),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    PYRO_CHESTPLATE(
+            Material.LEATHER_CHESTPLATE,
+            "&lРубашка пироманта",
+            new String[]{
+                    "&5Одежда с огоньком!"
+            },
+            Color.fromRGB(0xFF7E00),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    PYRO_PANTS(
+            Material.LEATHER_LEGGINGS,
+            "&lШтаны пироманта",
+            new String[]{
+                    "&5Немного в саже, но смотрятся просто огонь!"
+            },
+            Color.fromRGB(0xFF7E00),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    PYRO_BOOTS(
+            Material.LEATHER_BOOTS,
+            "&lСапоги пироманта",
+            new String[]{
+                    "&5Вы видели тех монахов, которые ходят по углям?",
+                    "&5Там где ходишь ты - там и уголь сам собой появляется!"
+            },
+            Color.fromRGB(0xFF7E00),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+
+    /*
+     *  Another
+     */
+
     FIRST_TEST_ITEM(
             Material.getMaterial(HubsArena.getStringConfigData("items.FIRST_TEST_ITEM.material")),
             HubsArena.getStringConfigData("items.FIRST_TEST_ITEM.name"),
@@ -56,6 +242,9 @@ public enum Items {
             HubsArena.getIntegerListConfigData("items.SECOND_TEST_ITEM.levels")
     );
 
+    /*
+     *  Implementation of some methods:
+     */
     private final ItemStack itemStack;
 
     Items(Material material, String name, String[] lore, Color color, Enchantment[] enchantments, int[] levels) {
@@ -104,7 +293,11 @@ public enum Items {
             itemMeta.setLore(StringUtils.replaceColor(Arrays.asList(lore)));
 
         itemMeta.setUnbreakable(true);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+        itemMeta.addItemFlags(
+                ItemFlag.HIDE_ATTRIBUTES,
+                ItemFlag.HIDE_UNBREAKABLE,
+                ItemFlag.HIDE_ENCHANTS
+        );
 
         if (enchantments != null) {
             for (int i = 0; i < enchantments.length; i++) {
@@ -113,9 +306,9 @@ public enum Items {
         }
 
         if ( material == Material.LEATHER_HELMET ||
-                material == Material.LEATHER_CHESTPLATE ||
-                material == Material.LEATHER_LEGGINGS ||
-                material == Material.LEATHER_BOOTS) {
+             material == Material.LEATHER_CHESTPLATE ||
+             material == Material.LEATHER_LEGGINGS ||
+             material == Material.LEATHER_BOOTS ) {
             LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) itemMeta;
             leatherArmorMeta.setColor(color);
             itemStack.setItemMeta(leatherArmorMeta);

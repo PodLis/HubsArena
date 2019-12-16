@@ -9,6 +9,9 @@ import ru.hubsmc.hubsarena.HubsArena;
 public enum MiItems {
 
     PYRO_SWORD("sword", "KITPVP_PYROSWORD"),
+    ARCHER_BOW("bow", "KITPVP_ARCHERBOW"),
+    GLEK_SWORD("sword", "ENDERSWORD"),
+
     FIRST_TEST_MI_ITEM(
             HubsArena.getStringConfigData("miitems.FIRST_TEST_MI_ITEM.itemType"),
             HubsArena.getStringConfigData("miitems.FIRST_TEST_MI_ITEM.itemName")

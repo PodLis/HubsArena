@@ -7,6 +7,11 @@ import ru.hubsmc.hubsarena.HubsArena;
 public enum PotionEffects {
 
     NORMAL_SPEED(PotionEffectType.SPEED, 9999999, 0),
+    LOW_SPEED(PotionEffectType.SLOW, 9999999, 0),
+    QUICK_SPEED(PotionEffectType.SPEED, 9999999, 2),
+
+    FIRE_PROTECTION(PotionEffectType.FIRE_RESISTANCE, 9999999, 1),
+
     FIRST_TEST_EFFECT(
             PotionEffectType.getByName(HubsArena.getStringConfigData("effects.FIRST_TEST_EFFECT.effectType")),
             HubsArena.getIntConfigData("effects.FIRST_TEST_EFFECT.duration"),

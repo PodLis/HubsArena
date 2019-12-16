@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.hubsmc.hubsarena.command.CommandGo;
 import ru.hubsmc.hubsarena.event.*;
@@ -50,12 +51,15 @@ public final class HubsArena extends JavaPlugin {
         try {
             arenaKeeper = new ArenaKeeper(new File(getFolder(), "data.yml"));
 
-            getServer().getPluginManager().registerEvents(new LeaveEvent(arenaKeeper), this);
-            getServer().getPluginManager().registerEvents(new JoinEvent(arenaKeeper), this);
-            getServer().getPluginManager().registerEvents(new MobKillEvent(arenaKeeper), this);
-            getServer().getPluginManager().registerEvents(new ItemInteractEvent(arenaKeeper), this);
-            getServer().getPluginManager().registerEvents(new PlayerKillEvent(arenaKeeper), this);
-            getServer().getPluginManager().registerEvents(new PlayerFallEvent(this), this);
+            PluginManager pm = getServer().getPluginManager();
+
+            pm.registerEvents(new LeaveEvent(arenaKeeper), this);
+            pm.registerEvents(new JoinEvent(arenaKeeper), this);
+            pm.registerEvents(new MobKillEvent(arenaKeeper), this);
+            pm.registerEvents(new ItemInteractEvent(arenaKeeper), this);
+            pm.registerEvents(new PlayerKillEvent(arenaKeeper), this);
+            pm.registerEvents(new PlayerFallEvent(this), this);
+            pm.registerEvents(new ItemDropEvent(), this);
 
             Commands commands = new Commands(this);
             getCommand("hubsarena").setExecutor(commands);

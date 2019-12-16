@@ -4,6 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
 import ru.hubsmc.hubsarena.heroes.Archer;
 import ru.hubsmc.hubsarena.heroes.Hero;
 import ru.hubsmc.hubsarena.heroes.Knight;
@@ -19,10 +23,10 @@ import static ru.hubsmc.hubsvalues.api.API.addDollars;
 import static ru.hubsmc.hubsvalues.api.API.updateCustomPlaceholders;
 
 public class ArenaKeeper {
-    private Map<Player, Hero> heroMap;
     private File dataFile;
     private YamlConfiguration dataFileConfig;
 
+    private Map<Player, Hero> heroMap;
 
     public ArenaKeeper(File dataFile) {
         this.heroMap = new HashMap<>();
@@ -30,6 +34,10 @@ public class ArenaKeeper {
         this.dataFileConfig = YamlConfiguration.loadConfiguration(dataFile);
     }
 
+
+    /*
+     *  Heroes
+     */
     public enum Heroes {ARCHER, KNIGHT, PYRO}
 
     public void pickHero(Player player, Heroes heroes) {
@@ -53,9 +61,20 @@ public class ArenaKeeper {
         updateCustomPlaceholders(player, heroMap.get(player).getName(), "", "", "");
     }
 
+    public Hero getHero(Player player) {
+        return heroMap.get(player);
+    }
+
+
+
+    /*
+     *  Battle
+     */
     public void sendPlayerToBattlefield(Player player) {
         heroMap.get(player).joinTheBattlefield();
     }
+
+
 
     // Need to realize
     public boolean hasPlayerAccessToHero(Player player, Heroes hero) {
@@ -65,6 +84,8 @@ public class ArenaKeeper {
     public boolean isPlayerInBattlefield(Player player) {
         return heroMap.containsKey(player) && heroMap.get(player).isInBattle();
     }
+
+
 
     public void sendPlayerToLobby(Player player) {
         if (isPlayerInBattlefield(player)) {
@@ -76,16 +97,18 @@ public class ArenaKeeper {
         player.getInventory().setItem(0, HubsArena.ITEM_MENU);
     }
 
+
+
     public void onJoinToArena(Player player) {
         sendPlayerToLobby(player);
         loadPlayer(player);
     }
 
-    public Hero getHero(Player player) {
-        return heroMap.get(player);
-    }
 
-    // Need to fill
+
+    /*
+     *  Rewards
+     */
     private int GetReward(EntityType type) {
         switch (type) {
             case ZOMBIE:          return 10;
@@ -108,7 +131,15 @@ public class ArenaKeeper {
         addDollars(player, GetReward(type));
     }
 
+    public void rewardPlayerForKill(Player player) {
+        addDollars(player, 50);
+    }
 
+
+
+    /*
+     *  Data storing
+     */
     public void loadPlayer(Player player) {
         if (dataFileConfig.contains(player.getUniqueId().toString())) {
             pickHero(player, Heroes.valueOf(dataFileConfig.getString(player.getUniqueId().toString())));
