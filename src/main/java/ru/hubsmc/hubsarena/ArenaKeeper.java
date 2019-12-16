@@ -19,10 +19,10 @@ import static ru.hubsmc.hubsvalues.api.API.addDollars;
 import static ru.hubsmc.hubsvalues.api.API.updateCustomPlaceholders;
 
 public class ArenaKeeper {
-
     private Map<Player, Hero> heroMap;
     private File dataFile;
     private YamlConfiguration dataFileConfig;
+
 
     public ArenaKeeper(File dataFile) {
         this.heroMap = new HashMap<>();
@@ -86,17 +86,26 @@ public class ArenaKeeper {
     }
 
     // Need to fill
-    public void rewardPlayerForMobKill(Player player, EntityType type) {
+    private int GetReward(EntityType type) {
         switch (type) {
-            case ZOMBIE:
-                addDollars(player, 10);
-                return;
-            case HUSK:
-                addDollars(player, 20);
-                return;
-            case SKELETON:
-                addDollars(player, 25);
+            case ZOMBIE:          return 10;
+            case HUSK:            return 20;
+            case SKELETON:        return 15;
+            case SPIDER:          return 10;
+            case CAVE_SPIDER:     return 25;
+            case PHANTOM:         return 25;
+            case ZOMBIE_VILLAGER: return 10;
+            case ENDERMAN:        return 15;
+            case ILLUSIONER:      return 30;
+            case RAVAGER:         return 35;
+            case VINDICATOR:      return 15;
+            case WITCH:           return 15;
+            default:              return 5;
         }
+    }
+
+    public void rewardPlayerForMobKill(Player player, EntityType type) {
+        addDollars(player, GetReward(type));
     }
 
 
