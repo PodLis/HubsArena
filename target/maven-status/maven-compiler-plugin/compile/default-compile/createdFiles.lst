@@ -2,12 +2,16 @@ ru\hubsmc\hubsarena\event\ItemDropEvent.class
 ru\hubsmc\hubsarena\command\CommandGo.class
 ru\hubsmc\hubsarena\event\LeaveEvent.class
 ru\hubsmc\hubsarena\ArenaKeeper$1.class
+ru\hubsmc\hubsarena\heroes\Berserk.class
 ru\hubsmc\hubsarena\heroes\Pyro$1.class
 ru\hubsmc\hubsarena\data\Particles.class
 ru\hubsmc\hubsarena\ArenaKeeper$Heroes.class
 ru\hubsmc\hubsarena\event\PlayerKillEvent$1.class
 ru\hubsmc\hubsarena\data\Sounds.class
+ru\hubsmc\hubsarena\heroes\EnderGlek.class
 ru\hubsmc\hubsarena\util\ServerUtils.class
+ru\hubsmc\hubsarena\heroes\Flyer.class
+ru\hubsmc\hubsarena\heroes\Assassin.class
 ru\hubsmc\hubsarena\heroes\Hero$1.class
 ru\hubsmc\hubsarena\HubsArena.class
 ru\hubsmc\hubsarena\heroes\Knight.class

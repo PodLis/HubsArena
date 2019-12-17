@@ -11,6 +11,8 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 import ru.hubsmc.hubsarena.ArenaKeeper;
+import ru.hubsmc.hubsarena.heroes.Berserk;
+import ru.hubsmc.hubsarena.heroes.Hero;
 
 import java.util.Set;
 
@@ -49,11 +51,14 @@ public class PlayerKillEvent implements Listener {
                     break; */
 
                 case PLAYER:
-                    arenaKeeper.rewardPlayerForKill(player.getKiller());
+                    Player PlayerKiller = player.getKiller();
+                    arenaKeeper.getHero(PlayerKiller).KillEvent();
+                    arenaKeeper.rewardPlayerForKill(PlayerKiller);
                     break;
             }
         }
 
+        arenaKeeper.getHero(player).DeathEvent();
         arenaKeeper.sendPlayerToLobby(player);
     }
 

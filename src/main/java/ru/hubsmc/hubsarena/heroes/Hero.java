@@ -64,6 +64,9 @@ public abstract class Hero {
         PlayerUtils.curePotionEffects(player);
     }
 
+    public void KillEvent() {}
+    public void DeathEvent() {}
+
     public void useSpell(Actions action) {
 
         int currentDelay = spellCooldown(action);

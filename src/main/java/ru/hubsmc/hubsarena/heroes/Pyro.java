@@ -29,7 +29,7 @@ public class Pyro extends Hero {
         inv.setLeggings(Items.PYRO_PANTS.getItemStack());
         inv.setBoots(Items.PYRO_BOOTS.getItemStack());
 
-        player.getInventory().setItem(0, MiItems.PYRO_SWORD.getItemStack());
+        inv.setItem(0, MiItems.PYRO_SWORD.getItemStack());
     }
 
     @Override

@@ -220,6 +220,193 @@ public enum Items {
             new int[]{2}
     ),
 
+    /*
+     *  Berserk kit:
+     *  - Armor
+     *  - Weapon
+     */
+    BERSERK_HELMET(
+            Material.LEATHER_HELMET,
+            "&lСуровый шлем викинга",
+            new String[]{
+                    "&5Они надевают их чтобы запугать врагов!"
+            },
+            Color.fromRGB(0x8c460b),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    BERSERK_CHESTPLATE(
+            Material.LEATHER_CHESTPLATE,
+            "&lСурово выглядящая рубаха",
+            new String[]{
+                    "&5Смотрится круто!"
+            },
+            Color.fromRGB(0x8c460b),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    BERSERK_PANTS(
+            Material.LEATHER_LEGGINGS,
+            "&lШтаны викинга",
+            new String[]{
+                    "&5Суровые боевые штаны!"
+            },
+            Color.fromRGB(0x8c460b),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    BERSERK_BOOTS(
+            Material.LEATHER_BOOTS,
+            "&lСапоги викинга",
+            new String[]{
+                    "&5В них ты прошел через тысячи боёв!",
+                    "&5В них тебе не стыдно будет топтать земли Вальхаллы!"
+            },
+            Color.fromRGB(0x8c460b),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    BERSERK_AXE_1(
+            Material.IRON_AXE,
+            "&lТопор викинга! &a&lI",
+            new String[]{
+                    "&5С каждым убийством он будто становится острее!",
+                    "&5Ровно также, как и сверепеет его хозяин!"
+            },
+            null,
+            new Enchantment[]{Enchantment.DAMAGE_ALL},
+            new int[]{1}
+    ),
+
+    BERSERK_AXE_2(
+            Material.IRON_AXE,
+            "&lТопор викинга! &e&lII",
+            new String[]{
+                    "&5С каждым убийством он будто становится острее!",
+                    "&5Ровно также, как и сверепеет его хозяин!"
+            },
+            null,
+            new Enchantment[]{Enchantment.DAMAGE_ALL},
+            new int[]{3}
+    ),
+
+    BERSERK_AXE_3(
+            Material.IRON_AXE,
+            "&lКровавый топор викинга! &6&lIII",
+            new String[]{
+                    "&5С каждым убийством он будто становится острее!",
+                    "&5Ровно также, как и сверепеет его хозяин!"
+            },
+            null,
+            new Enchantment[]{Enchantment.DAMAGE_ALL},
+            new int[]{6}
+    ),
+
+    BERSERK_AXE_4(
+            Material.IRON_AXE,
+            "&lКровожадный топор викинга! &c&lIV",
+            new String[]{
+                    "&5С каждым убийством он будто становится острее!",
+                    "&5Ровно также, как и сверепеет его хозяин!"
+            },
+            null,
+            new Enchantment[]{Enchantment.DAMAGE_ALL},
+            new int[]{10}
+    ),
+
+    BERSERK_AXE_5(
+            Material.IRON_AXE,
+            "&lЗачарованный топор викинга! &5&lV",
+            new String[]{
+                    "&5Этот топор изничтожил десятки врагов!",
+                    "&5Один явно на твоей стороне!"
+            },
+            null,
+            new Enchantment[]{Enchantment.DAMAGE_ALL},
+            new int[]{15}
+    ),
+
+
+    /*
+     *  Archer kit:
+     *  - Armor
+     *  - Bow
+     *  - Arrow x1
+     */
+    END_HELMET(
+            Material.LEATHER_HELMET,
+            "&lШляпа Енда",
+            new String[]{
+                    "&5От нежданчиков в голову не телепортируешься!"
+            },
+            Color.fromRGB(0xB284BE),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    END_CHESTPLATE(
+            Material.LEATHER_CHESTPLATE,
+            "&lРубашка Енда",
+            new String[]{
+                    "&5Это не совсем броня, но смотрится красиво!"
+            },
+            Color.fromRGB(0xB284BE),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    END_PANTS(
+            Material.LEATHER_LEGGINGS,
+            "&lШтаны Енда",
+            new String[]{
+                    "&5При телепортации не забывай про них!"
+            },
+            Color.fromRGB(0xB284BE),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    END_BOOTS(
+            Material.LEATHER_BOOTS,
+            "&lСапоги Енда",
+            new String[]{
+                    "&5Иногда и побегать в радость..."
+            },
+            Color.fromRGB(0xB284BE),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+    END_BOX(
+            Material.PURPLE_SHULKER_BOX,
+            "&lКарманный шалкербокс",
+            new String[]{
+                    "&5Хмм... Что же внутри...?"
+            },
+            Color.fromRGB(0xB284BE),
+            new Enchantment[]{Enchantment.PROTECTION_ENVIRONMENTAL},
+            new int[]{2}
+    ),
+
+
+    /*
+     *  Flyer
+     */
+    FLYER_CHEST(
+            Material.ELYTRA,
+            "&lКрылья",
+            new String[]{
+                    "&5Просто крылья..."
+            },
+            null,
+            null,
+            null
+    ),
+
 
     /*
      *  Another
@@ -252,29 +439,23 @@ public enum Items {
     }
 
     Items(Material material, String name, List<String> lore, int color, List<String> enchantments, List<Integer> levels) {
-        String[] aLore;
-        Enchantment[] anEnchantments;
-        int[] aLevels;
+        String[] aLore = null;
+        Enchantment[] anEnchantments = null;
+        int[] aLevels = null;
 
-        if (lore == null) {
-            aLore = null;
-        } else {
+        if (lore != null) {
             aLore = new String[lore.size()];
             aLore = lore.toArray(aLore);
         }
 
-        if (enchantments == null) {
-            anEnchantments = null;
-        } else {
+        if (enchantments != null) {
             anEnchantments = new Enchantment[enchantments.size()];
             for (int i = 0; i < enchantments.size(); i++) {
                 anEnchantments[i] = Enchantment.getByName(enchantments.get(i));
             }
         }
 
-        if (levels == null) {
-            aLevels = null;
-        } else {
+        if (levels != null) {
             aLevels = new int[levels.size()];
             for (int i = 0; i < levels.size(); i++) {
                 aLevels[i] = levels.get(i);
