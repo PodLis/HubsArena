@@ -19,26 +19,17 @@ public class ItemInteractEvent implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
-        if (event.getAction() == Action.PHYSICAL) {
-            return;
+        if ( (event.getAction() != Action.PHYSICAL) && (event.getItem() != null) ) {
+            Actions action = Actions.getActionIfExist(
+                    PlayerUtils.getClickType(event.getAction(), event.getPlayer().isSneaking()),
+                    Items.getItemIfExist(event.getItem())
+            );
+
+            if (action != null) {
+                event.setCancelled(true);
+                arenaKeeper.getHero(event.getPlayer()).useSpell(action);
+            }
         }
-
-        if (event.getItem() == null) {
-            return;
-        }
-
-        Actions action = Actions.getActionIfExist(
-                PlayerUtils.getClickType(event.getAction(), event.getPlayer().isSneaking()),
-                Items.getItemIfExist(event.getItem())
-        );
-
-        if (action == null) {
-            return;
-        }
-
-        event.setCancelled(true);
-
-        arenaKeeper.getHero(event.getPlayer()).useSpell(action);
     }
 
 }

@@ -74,17 +74,29 @@ public class Cowboy extends Hero {
              *  We should create arrow around player.
              *  Otherwise arrow will get collision with shooter.
              */
-            Location spawnPoint = player.getLocation().add(0, 1, 0); // Get coords of player ass
-            Vector vector = player.getLocation().getDirection().normalize(); // Get player viewpoint direction
+            Location spawnPoint = player.getLocation().add(0, 1.2, 0); // Get coords of player ass
+            Vector direction = player.getLocation().getDirection(); // Get player viewpoint direction
+
             // And normalize vector (vect len == 1)
-            vector = vector.multiply(2);
+            Vector vector = direction.normalize().multiply(2);
             spawnPoint.add(vector);
 
             Arrow bullet = player.getWorld().spawn(spawnPoint, Arrow.class);
-            bullet.setPickupStatus(Arrow.PickupStatus.DISALLOWED);
+            bullet.setPickupStatus(Arrow.PickupStatus.CREATIVE_ONLY);
             bullet.setShooter(player);
-            bullet.setCritical(true);
-            bullet.setGlowing(true);
+
+            //bullet.setCritical(true);
+            //bullet.setGlowing(true);
+
+            Vector dispersion = new Vector(
+                    (Math.random() - 0.5) / 4.0f,
+                    (Math.random() - 0.5) / 4.0f,
+                    (Math.random() - 0.5) / 4.0f
+            );
+
+            direction.add(dispersion);
+
+            bullet.setVelocity(direction.multiply(3));
 
             //player.launchProjectile(bullet, player.getLocation().getDirection().multiply(3));
             PlayerUtils.playSound(Sounds.SHOOT_SOUND, player);
@@ -94,7 +106,7 @@ public class Cowboy extends Hero {
     }
 
     public void Reload(){
-        if (this.Ammo == 0) {
+        if (this.Ammo < 5) {
             PlayerUtils.playSound(Sounds.RELOAD_SOUND, player);
             this.ChangeAmmo(this.Ammo + 1);
         }
@@ -103,8 +115,6 @@ public class Cowboy extends Hero {
     @Override
     public void useSpell(Actions action) {
         super.useSpell(action);
-
-        System.out.println("ACTION");
 
         switch (action) {
             case SHOOT1:

@@ -71,7 +71,19 @@ public abstract class Hero {
         int currentDelay = spellCooldown(action);
 
         if (currentDelay > 0) {
-            player.sendMessage("Подождите ещё " + currentDelay + " секунд");
+            switch (action) {
+                case TOSS:
+                case HEAL:
+                    player.sendMessage("Подождите ещё " + currentDelay + " секунд");
+                    return;
+
+                case LOAD0:
+                case LOAD1:
+                case LOAD2:
+                case LOAD3:
+                case LOAD4:
+                    player.sendMessage("Черт, не получается перезаряжаться так быстро!");
+            }
             return;
         }
 
