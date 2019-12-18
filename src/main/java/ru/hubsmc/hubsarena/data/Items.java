@@ -409,6 +409,99 @@ public enum Items {
 
 
     /*
+     *  Cowboy
+     *  - Armor
+     *  - Weapon states
+     */
+
+    COWBOY_CHESTPLATE(
+            Material.LEATHER_CHESTPLATE,
+            "&lРубашка ковбоя",
+            new String[]{
+                    "&5От пуль конечно не защитит, но ты и не подставляйся!"
+            },
+            Color.fromRGB(0xE8E8E8),
+            new Enchantment[]{},
+            new int[]{}
+    ),
+
+    COWBOY_PANTS(
+            Material.LEATHER_LEGGINGS,
+            "&lШтанишки дикого запада",
+            new String[]{
+                    "&5Ультра брутальные!"
+            },
+            Color.fromRGB(0x663000),
+            new Enchantment[]{},
+            new int[]{}
+    ),
+
+    COWBOY_BOOTS(
+            Material.LEATHER_BOOTS,
+            "&lСапоги ковбоя",
+            new String[]{
+                    "&5Шпоры остались на западе, вместе с лошадкой..."
+            },
+            Color.fromRGB(0x1F1F1F),
+            new Enchantment[]{},
+            new int[]{}
+    ),
+
+    COWBOY_PISTOL_0(
+            Material.IRON_HORSE_ARMOR,
+            "&lРевольвер: &c&lX",
+            null,
+            null,
+            null,
+            null
+    ),
+
+    COWBOY_PISTOL_1(
+            Material.IRON_HORSE_ARMOR,
+            "&lРевольвер: &e&lI",
+            null,
+            null,
+            null,
+            null
+    ),
+
+    COWBOY_PISTOL_2(
+            Material.IRON_HORSE_ARMOR,
+            "&lРевольвер: &e&lII",
+            null,
+            null,
+            null,
+            null
+    ),
+
+    COWBOY_PISTOL_3(
+            Material.IRON_HORSE_ARMOR,
+            "&lРевольвер: &6&lIII",
+            null,
+            null,
+            null,
+            null
+    ),
+
+    COWBOY_PISTOL_4(
+            Material.IRON_HORSE_ARMOR,
+            "&lРевольвер: &6&lIIII",
+            null,
+            null,
+            null,
+            null
+    ),
+
+    COWBOY_PISTOL_5(
+            Material.IRON_HORSE_ARMOR,
+            "&lРевольвер: &6&lIIIII",
+            null,
+            null,
+            null,
+            null
+    ),
+
+    /*
      *  Another
      */
 

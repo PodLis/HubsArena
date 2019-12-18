@@ -14,6 +14,7 @@ ru\hubsmc\hubsarena\heroes\Flyer.class
 ru\hubsmc\hubsarena\heroes\Assassin.class
 ru\hubsmc\hubsarena\heroes\Hero$1.class
 ru\hubsmc\hubsarena\HubsArena.class
+ru\hubsmc\hubsarena\heroes\Cowboy.class
 ru\hubsmc\hubsarena\heroes\Knight.class
 ru\hubsmc\hubsarena\data\Actions.class
 ru\hubsmc\hubsarena\util\StringUtils.class
@@ -35,3 +36,4 @@ ru\hubsmc\hubsarena\data\PotionEffects.class
 ru\hubsmc\hubsarena\event\MobKillEvent.class
 ru\hubsmc\hubsarena\Commands.class
 ru\hubsmc\hubsarena\heroes\Knight$1.class
+ru\hubsmc\hubsarena\heroes\Cowboy$1.class

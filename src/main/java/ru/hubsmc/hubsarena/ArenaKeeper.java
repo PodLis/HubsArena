@@ -35,7 +35,7 @@ public class ArenaKeeper {
     /*
      *  Heroes
      */
-    public enum Heroes {ARCHER, KNIGHT, PYRO, BERSERK, ENDERGLEK, ASSASSIN, FLYER}
+    public enum Heroes {ARCHER, KNIGHT, PYRO, BERSERK, ENDERGLEK, ASSASSIN, FLYER, COWBOY}
 
     public void pickHero(Player player, Heroes heroes) {
         switch (heroes) {
@@ -61,6 +61,10 @@ public class ArenaKeeper {
 
             case FLYER:
                 heroMap.put(player, new Flyer(player));
+                break;
+
+            case COWBOY:
+                heroMap.put(player, new Cowboy(player));
                 break;
 
             default: {

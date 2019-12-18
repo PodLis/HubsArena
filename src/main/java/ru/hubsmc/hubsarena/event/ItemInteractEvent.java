@@ -19,7 +19,6 @@ public class ItemInteractEvent implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
-
         if (event.getAction() == Action.PHYSICAL) {
             return;
         }

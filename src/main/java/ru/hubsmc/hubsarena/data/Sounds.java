@@ -10,11 +10,25 @@ public enum Sounds {
             0, 0, 0,
             1.0f, 1.0f
     ),
+
     HEAL_SOUND(
             Sound.ENTITY_EXPERIENCE_ORB_PICKUP,
             0, 0, 0,
             1.0f, 1.0f
     ),
+
+    SHOOT_SOUND(
+            Sound.ENTITY_FIREWORK_ROCKET_BLAST,
+            0, 0, 0,
+            1.0f, 1.0f
+    ),
+
+    RELOAD_SOUND(
+            Sound.BLOCK_FURNACE_FIRE_CRACKLE,
+            0, 0, 0,
+            1.0f, 1.0f
+    ),
+
     FIRST_TEST_SOUND(
             Sound.valueOf(HubsArena.getStringConfigData("sounds.FIRST_TEST_SOUND.sound")),
             HubsArena.getDoubleConfigData("sounds.FIRST_TEST_SOUND.offsetX"),
