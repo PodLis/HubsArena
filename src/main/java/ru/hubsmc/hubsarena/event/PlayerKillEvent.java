@@ -51,9 +51,13 @@ public class PlayerKillEvent implements Listener {
                     break; */
 
                 case PLAYER:
-                    Player PlayerKiller = player.getKiller();
-                    arenaKeeper.getHero(PlayerKiller).KillEvent();
-                    arenaKeeper.rewardPlayerForKill(PlayerKiller);
+                    try {
+                        Player PlayerKiller = player.getKiller();
+                        arenaKeeper.getHero(PlayerKiller).KillEvent();
+                        arenaKeeper.rewardPlayerForKill(PlayerKiller);
+                    } catch (Throwable E) {
+                        // Wtf?
+                    }
                     break;
             }
         }

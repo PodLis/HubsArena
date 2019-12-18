@@ -1,5 +1,6 @@
 package ru.hubsmc.hubsarena.heroes;
 
+import net.Indyuce.mmoitems.ability.onhit.Poison;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -74,7 +75,7 @@ public class Cowboy extends Hero {
              *  We should create arrow around player.
              *  Otherwise arrow will get collision with shooter.
              */
-            Location spawnPoint = player.getLocation().add(0, 1.2, 0); // Get coords of player ass
+            Location spawnPoint = player.getLocation().add(0, 1.5, 0); // Get coords of player ass
             Vector direction = player.getLocation().getDirection(); // Get player viewpoint direction
 
             // And normalize vector (vect len == 1)
@@ -89,9 +90,9 @@ public class Cowboy extends Hero {
             //bullet.setGlowing(true);
 
             Vector dispersion = new Vector(
-                    (Math.random() - 0.5) / 4.0f,
-                    (Math.random() - 0.5) / 4.0f,
-                    (Math.random() - 0.5) / 4.0f
+                    (Math.random() - 0.5) / 6.5f,
+                    (Math.random() - 0.5) / 6.5f,
+                    (Math.random() - 0.5) / 6.5f
             );
 
             direction.add(dispersion);

@@ -112,7 +112,7 @@ public abstract class Hero {
 
     private int spellCooldown(Actions action) {
         if (cooldowns.containsKey(action)) {
-            return (int) TimeUnit.MILLISECONDS.toSeconds(cooldowns.get(action) + action.getCooldownInTicks() * 50 - System.currentTimeMillis());
+            return (int) TimeUnit.MILLISECONDS.toSeconds(cooldowns.get(action) + action.getCooldownInTicks() * 50 - System.currentTimeMillis() + 999);
         }
         return 0;
     }

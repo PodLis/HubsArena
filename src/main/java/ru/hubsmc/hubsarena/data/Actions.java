@@ -8,11 +8,11 @@ public enum Actions {
     TOSS(ClickType.RIGHT, Items.TOSSER_WAND, 80, 2),
     HEAL(ClickType.RIGHT, Items.HEALING_WAND, 80, 4),
 
-    SHOOT1(ClickType.RIGHT, Items.COWBOY_PISTOL_1, 20, 0),
-    SHOOT2(ClickType.RIGHT, Items.COWBOY_PISTOL_2, 20, 0),
-    SHOOT3(ClickType.RIGHT, Items.COWBOY_PISTOL_3, 20, 0),
-    SHOOT4(ClickType.RIGHT, Items.COWBOY_PISTOL_4, 20, 0),
-    SHOOT5(ClickType.RIGHT, Items.COWBOY_PISTOL_5, 20, 0),
+    SHOOT1(ClickType.RIGHT, Items.COWBOY_PISTOL_1, 30, 0),
+    SHOOT2(ClickType.RIGHT, Items.COWBOY_PISTOL_2, 30, 0),
+    SHOOT3(ClickType.RIGHT, Items.COWBOY_PISTOL_3, 30, 0),
+    SHOOT4(ClickType.RIGHT, Items.COWBOY_PISTOL_4, 30, 0),
+    SHOOT5(ClickType.RIGHT, Items.COWBOY_PISTOL_5, 30, 0),
 
     LOAD0(ClickType.LEFT, Items.COWBOY_PISTOL_0, 80, 0),
     LOAD1(ClickType.LEFT, Items.COWBOY_PISTOL_1, 80, 0),
