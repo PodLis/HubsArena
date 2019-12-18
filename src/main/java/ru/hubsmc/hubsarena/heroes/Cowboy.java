@@ -86,7 +86,7 @@ public class Cowboy extends Hero {
             bullet.setCritical(true);
             bullet.setGlowing(true);
 
-            player.launchProjectile(Arrow.class, player.getLocation().getDirection().multiply(3));
+            //player.launchProjectile(bullet, player.getLocation().getDirection().multiply(3));
             PlayerUtils.playSound(Sounds.SHOOT_SOUND, player);
 
             this.ChangeAmmo(this.Ammo - 1);
@@ -103,6 +103,8 @@ public class Cowboy extends Hero {
     @Override
     public void useSpell(Actions action) {
         super.useSpell(action);
+
+        System.out.println("ACTION");
 
         switch (action) {
             case SHOOT1:

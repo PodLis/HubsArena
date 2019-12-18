@@ -46,8 +46,8 @@ public enum Actions {
     }
 
     public static Actions getActionIfExist(ClickType clickType, Items item) {
-        for (Actions action : Actions.values()) {
-            if (action.item == item) {
+        for (Actions action: Actions.values()) {
+            if (action.item.getItemStack().equals(item.getItemStack())) {
                 if (action.clickType == clickType) {
                     return action;
                 }

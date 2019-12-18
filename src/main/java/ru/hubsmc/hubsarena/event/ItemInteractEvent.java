@@ -39,7 +39,6 @@ public class ItemInteractEvent implements Listener {
         event.setCancelled(true);
 
         arenaKeeper.getHero(event.getPlayer()).useSpell(action);
-
     }
 
 }

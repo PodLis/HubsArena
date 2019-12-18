@@ -68,8 +68,8 @@ public abstract class Hero {
     public void DeathEvent() {}
 
     public void useSpell(Actions action) {
-
         int currentDelay = spellCooldown(action);
+
         if (currentDelay > 0) {
             player.sendMessage("Подождите ещё " + currentDelay + " секунд");
             return;
