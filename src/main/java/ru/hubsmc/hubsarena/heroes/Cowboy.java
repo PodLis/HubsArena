@@ -79,28 +79,38 @@ public class Cowboy extends Hero {
             Vector direction = player.getLocation().getDirection(); // Get player viewpoint direction
 
             // And normalize vector (vect len == 1)
-            Vector vector = direction.normalize().multiply(2);
-            spawnPoint.add(vector);
+            Vector vector = direction.normalize().multiply(3);
+            Location arrowSpawnPoint = spawnPoint.add(vector);
 
-            Arrow bullet = player.getWorld().spawn(spawnPoint, Arrow.class);
+            Arrow bullet = player.getWorld().spawn(arrowSpawnPoint, Arrow.class);
             bullet.setPickupStatus(Arrow.PickupStatus.CREATIVE_ONLY);
             bullet.setShooter(player);
+
+            bullet.setSilent(true);
 
             //bullet.setCritical(true);
             //bullet.setGlowing(true);
 
             Vector dispersion = new Vector(
-                    (Math.random() - 0.5) / 6.5f,
-                    (Math.random() - 0.5) / 6.5f,
-                    (Math.random() - 0.5) / 6.5f
+                    (Math.random() - 0.5) / 5.75f,
+                    (Math.random() - 0.5) / 5.75f,
+                    (Math.random() - 0.5) / 5.75f
             );
 
             direction.add(dispersion);
 
             bullet.setVelocity(direction.multiply(3));
 
-            //player.launchProjectile(bullet, player.getLocation().getDirection().multiply(3));
             PlayerUtils.playSound(Sounds.SHOOT_SOUND, player);
+
+            player.getWorld().spawnParticle(
+                    Particle.SMOKE_LARGE,
+                    spawnPoint.subtract(0, 0.3, 0).
+                            add(direction.normalize()),
+                    5,
+                    0.01, 0.01, 0.01,
+                    0.01, null, false
+            );
 
             this.ChangeAmmo(this.Ammo - 1);
         }

@@ -24,7 +24,13 @@ public enum Sounds {
     ),
 
     RELOAD_SOUND(
-            Sound.BLOCK_FURNACE_FIRE_CRACKLE,
+            Sound.BLOCK_STONE_BUTTON_CLICK_ON,
+            0, 0, 0,
+            1.0f, 1.0f
+    ),
+
+    BULLET_INTERACT(
+            Sound.BLOCK_BLASTFURNACE_FIRE_CRACKLE,
             0, 0, 0,
             1.0f, 1.0f
     ),
