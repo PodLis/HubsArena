@@ -6,7 +6,7 @@ import ru.hubsmc.hubsarena.HubsArena;
 public enum Actions {
 
     TOSS(ClickType.RIGHT, Items.TOSSER_WAND, 80, 2),
-    HEAL(ClickType.RIGHT, Items.HEALING_WAND, 80, 4),
+    HEAL(ClickType.RIGHT, Items.HEALING_WAND, 80, 12),
 
     SHOOT1(ClickType.RIGHT, Items.COWBOY_PISTOL_1, 40, 0),
     SHOOT2(ClickType.RIGHT, Items.COWBOY_PISTOL_2, 40, 0),

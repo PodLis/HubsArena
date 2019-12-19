@@ -103,10 +103,12 @@ public class Cowboy extends Hero {
 
             PlayerUtils.playSound(Sounds.SHOOT_SOUND, player);
 
+            Vector offset = direction.normalize();
             player.getWorld().spawnParticle(
                     Particle.SMOKE_LARGE,
-                    spawnPoint.subtract(0, 0.3, 0).
-                            add(direction.normalize()),
+                    spawnPoint.subtract(-offset.getX() / 2.0f,
+                                        -offset.getY() / 2.0f + 0.3,
+                                        -offset.getZ() / 2.0f),
                     5,
                     0.01, 0.01, 0.01,
                     0.01, null, false

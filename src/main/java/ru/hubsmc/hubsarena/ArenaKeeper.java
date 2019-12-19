@@ -67,6 +67,10 @@ public class ArenaKeeper {
                 heroMap.put(player, new Cowboy(player));
                 break;
 
+            case ENDERGLEK:
+                heroMap.put(player, new EnderGlek(player));
+                break;
+
             default: {
                 break;
             }
