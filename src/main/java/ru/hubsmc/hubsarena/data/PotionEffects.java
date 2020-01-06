@@ -11,6 +11,9 @@ public enum PotionEffects {
     QUICK_SPEED(PotionEffectType.SPEED, 9999999, 2),
 
     FIRE_PROTECTION(PotionEffectType.FIRE_RESISTANCE, 9999999, 1),
+    FALL_PROTECTION(PotionEffectType.SLOW_FALLING, 9999999, 2),
+
+    INVISIBILITY(PotionEffectType.INVISIBILITY, 9999999, 2),
 
     FIRST_TEST_EFFECT(
             PotionEffectType.getByName(HubsArena.getStringConfigData("effects.FIRST_TEST_EFFECT.effectType")),

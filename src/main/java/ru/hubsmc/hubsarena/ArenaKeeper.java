@@ -8,10 +8,7 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
-import ru.hubsmc.hubsarena.heroes.Archer;
-import ru.hubsmc.hubsarena.heroes.Hero;
-import ru.hubsmc.hubsarena.heroes.Knight;
-import ru.hubsmc.hubsarena.heroes.Pyro;
+import ru.hubsmc.hubsarena.heroes.*;
 import ru.hubsmc.hubsarena.util.PlayerUtils;
 
 import java.io.File;
@@ -38,22 +35,42 @@ public class ArenaKeeper {
     /*
      *  Heroes
      */
-    public enum Heroes {ARCHER, KNIGHT, PYRO}
+    public enum Heroes {ARCHER, KNIGHT, PYRO, BERSERK, ENDERGLEK, ASSASSIN, FLYER, COWBOY}
 
     public void pickHero(Player player, Heroes heroes) {
         switch (heroes) {
-            case ARCHER: {
+            case ARCHER:
                 heroMap.put(player, new Archer(player));
                 break;
-            }
-            case KNIGHT: {
+
+            case KNIGHT:
                 heroMap.put(player, new Knight(player));
                 break;
-            }
-            case PYRO: {
+
+            case PYRO:
                 heroMap.put(player, new Pyro(player));
                 break;
-            }
+
+            case BERSERK:
+                heroMap.put(player, new Berserk(player));
+                break;
+
+            case ASSASSIN:
+                heroMap.put(player, new Assassin(player));
+                break;
+
+            case FLYER:
+                heroMap.put(player, new Flyer(player));
+                break;
+
+            case COWBOY:
+                heroMap.put(player, new Cowboy(player));
+                break;
+
+            case ENDERGLEK:
+                heroMap.put(player, new EnderGlek(player));
+                break;
+
             default: {
                 break;
             }

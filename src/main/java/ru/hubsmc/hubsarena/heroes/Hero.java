@@ -64,11 +64,26 @@ public abstract class Hero {
         PlayerUtils.curePotionEffects(player);
     }
 
-    public void useSpell(Actions action) {
+    public void KillEvent() {}
+    public void DeathEvent() {}
 
+    public void useSpell(Actions action) {
         int currentDelay = spellCooldown(action);
+
         if (currentDelay > 0) {
-            player.sendMessage("Подождите ещё " + currentDelay + " секунд");
+            switch (action) {
+                case TOSS:
+                case HEAL:
+                    player.sendMessage("Подождите ещё " + currentDelay + " секунд");
+                    return;
+
+                case LOAD0:
+                case LOAD1:
+                case LOAD2:
+                case LOAD3:
+                case LOAD4:
+                    player.sendMessage("Черт, не получается перезаряжаться так быстро!");
+            }
             return;
         }
 
@@ -97,7 +112,7 @@ public abstract class Hero {
 
     private int spellCooldown(Actions action) {
         if (cooldowns.containsKey(action)) {
-            return (int) TimeUnit.MILLISECONDS.toSeconds(cooldowns.get(action) + action.getCooldownInTicks() * 50 - System.currentTimeMillis());
+            return (int) TimeUnit.MILLISECONDS.toSeconds(cooldowns.get(action) + action.getCooldownInTicks() * 50 - System.currentTimeMillis() + 999);
         }
         return 0;
     }

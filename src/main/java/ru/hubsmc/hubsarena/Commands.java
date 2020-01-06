@@ -80,7 +80,14 @@ public class Commands implements CommandExecutor, TabCompleter {
                             }
 
                             if (args.length > 2) {
-                                plugin.getArenaKeeper().pickHero(target, ArenaKeeper.Heroes.valueOf(args[2].toUpperCase()));
+                                try {
+                                    ArenaKeeper.Heroes hero = ArenaKeeper.Heroes.valueOf(args[2].toUpperCase());
+                                    plugin.getArenaKeeper().pickHero(target, hero);
+                                } catch (Throwable E) {
+                                    if (sender instanceof Player) {
+                                        sendPrefixMessage(sender, "Неизвестный кит...");
+                                    }
+                                }
                             }
                             plugin.getArenaKeeper().sendPlayerToBattlefield(target);
 
