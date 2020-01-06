@@ -7,13 +7,13 @@ import ru.hubsmc.hubsarena.data.Items;
 import ru.hubsmc.hubsarena.data.MiItems;
 import ru.hubsmc.hubsarena.data.PotionEffects;
 
-public class Flyer extends Hero{
+public class Flier extends Hero{
 
     static {
-        setNames(ArenaKeeper.Heroes.PYRO, "ЕндерГлэк", "ЕндерГлэка");
+        setNames(ArenaKeeper.Heroes.FLIER, "Летун", "Летун");
     }
 
-    public Flyer(Player player) {
+    public Flier(Player player) {
         super(player);
     }
 

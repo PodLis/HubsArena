@@ -1,25 +1,8 @@
 package ru.hubsmc.hubsarena.heroes;
 
-import net.Indyuce.mmoitems.ability.onhit.Poison;
 import org.bukkit.*;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.*;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.permissions.PermissionAttachmentInfo;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.potion.PotionData;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.projectiles.ProjectileSource;
-import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 import ru.hubsmc.hubsarena.ArenaKeeper;
 import ru.hubsmc.hubsarena.data.Actions;
@@ -28,14 +11,10 @@ import ru.hubsmc.hubsarena.data.PotionEffects;
 import ru.hubsmc.hubsarena.data.Sounds;
 import ru.hubsmc.hubsarena.util.PlayerUtils;
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
 public class Cowboy extends Hero {
 
     static {
-        setNames(ArenaKeeper.Heroes.BERSERK, "Ковбой", "Ковбоя");
+        setNames(ArenaKeeper.Heroes.COWBOY, "Ковбой", "Ковбоя");
     }
 
     public int Ammo;
@@ -75,10 +54,10 @@ public class Cowboy extends Hero {
              *  We should create arrow around player.
              *  Otherwise arrow will get collision with shooter.
              */
-            Location spawnPoint = player.getLocation().add(0, 1.5, 0); // Get coords of player ass
+            Location spawnPoint = player.getLocation().add(0, 1.5, 0); // Get cds of player ass
             Vector direction = player.getLocation().getDirection(); // Get player viewpoint direction
 
-            // And normalize vector (vect len == 1)
+            // And normalize vector (vector len == 1)
             Vector vector = direction.normalize().multiply(3);
             Location arrowSpawnPoint = spawnPoint.add(vector);
 

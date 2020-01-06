@@ -1,16 +1,14 @@
 package ru.hubsmc.hubsarena.heroes;
 
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.PlayerInventory;
 import ru.hubsmc.hubsarena.ArenaKeeper;
-import ru.hubsmc.hubsarena.data.Items;
 import ru.hubsmc.hubsarena.data.MiItems;
 import ru.hubsmc.hubsarena.data.PotionEffects;
 
-public class Assassin extends Hero{
+public class Assassin extends Hero {
 
     static {
-        setNames(ArenaKeeper.Heroes.PYRO, "ЕндерГлэк", "ЕндерГлэка");
+        setNames(ArenaKeeper.Heroes.ASSASSIN, "Ассасин", "Ассасина");
     }
 
     public Assassin(Player player) {

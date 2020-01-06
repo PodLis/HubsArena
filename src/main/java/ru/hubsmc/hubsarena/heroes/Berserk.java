@@ -3,9 +3,7 @@ package ru.hubsmc.hubsarena.heroes;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 import ru.hubsmc.hubsarena.ArenaKeeper;
-import ru.hubsmc.hubsarena.data.Actions;
 import ru.hubsmc.hubsarena.data.Items;
-import ru.hubsmc.hubsarena.data.MiItems;
 import ru.hubsmc.hubsarena.data.PotionEffects;
 
 public class Berserk extends Hero {

@@ -5,7 +5,6 @@ import org.bukkit.inventory.PlayerInventory;
 import ru.hubsmc.hubsarena.ArenaKeeper;
 import ru.hubsmc.hubsarena.data.Actions;
 import ru.hubsmc.hubsarena.data.Items;
-import ru.hubsmc.hubsarena.data.MiItems;
 import ru.hubsmc.hubsarena.data.PotionEffects;
 
 public class Knight extends Hero {

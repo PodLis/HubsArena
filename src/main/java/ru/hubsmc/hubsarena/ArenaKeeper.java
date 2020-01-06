@@ -4,10 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
 import ru.hubsmc.hubsarena.heroes.*;
 import ru.hubsmc.hubsarena.util.PlayerUtils;
 
@@ -35,7 +31,7 @@ public class ArenaKeeper {
     /*
      *  Heroes
      */
-    public enum Heroes {ARCHER, KNIGHT, PYRO, BERSERK, ENDERGLEK, ASSASSIN, FLYER, COWBOY}
+    public enum Heroes {ARCHER, KNIGHT, PYRO, BERSERK, ENDER_GLEK, ASSASSIN, FLIER, COWBOY}
 
     public void pickHero(Player player, Heroes heroes) {
         switch (heroes) {
@@ -59,15 +55,15 @@ public class ArenaKeeper {
                 heroMap.put(player, new Assassin(player));
                 break;
 
-            case FLYER:
-                heroMap.put(player, new Flyer(player));
+            case FLIER:
+                heroMap.put(player, new Flier(player));
                 break;
 
             case COWBOY:
                 heroMap.put(player, new Cowboy(player));
                 break;
 
-            case ENDERGLEK:
+            case ENDER_GLEK:
                 heroMap.put(player, new EnderGlek(player));
                 break;
 
@@ -128,19 +124,32 @@ public class ArenaKeeper {
      */
     private int GetReward(EntityType type) {
         switch (type) {
-            case ZOMBIE:          return 10;
-            case HUSK:            return 20;
-            case SKELETON:        return 15;
-            case SPIDER:          return 10;
-            case CAVE_SPIDER:     return 25;
-            case PHANTOM:         return 25;
-            case ZOMBIE_VILLAGER: return 10;
-            case ENDERMAN:        return 15;
-            case ILLUSIONER:      return 30;
-            case RAVAGER:         return 35;
-            case VINDICATOR:      return 15;
-            case WITCH:           return 15;
-            default:              return 5;
+            case ZOMBIE:
+            case ZOMBIE_VILLAGER:
+            case SPIDER:
+                return 10;
+
+            case SKELETON:
+            case WITCH:
+            case VINDICATOR:
+            case ENDERMAN:
+                return 15;
+
+            case HUSK:
+                return 20;
+
+            case CAVE_SPIDER:
+            case PHANTOM:
+                return 25;
+
+            case ILLUSIONER:
+                return 30;
+
+            case RAVAGER:
+                return 35;
+
+            default:
+                return 5;
         }
     }
 
