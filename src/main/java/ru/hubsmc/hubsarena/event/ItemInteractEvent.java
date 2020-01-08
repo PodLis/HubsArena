@@ -2,20 +2,19 @@ package ru.hubsmc.hubsarena.event;
 
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.projectiles.ProjectileSource;
 import ru.hubsmc.hubsarena.ArenaKeeper;
+import ru.hubsmc.hubsarena.HubsArena;
 import ru.hubsmc.hubsarena.data.Actions;
 import ru.hubsmc.hubsarena.data.Items;
-import ru.hubsmc.hubsarena.data.Particles;
 import ru.hubsmc.hubsarena.data.Sounds;
 import ru.hubsmc.hubsarena.heroes.Cowboy;
 import ru.hubsmc.hubsarena.util.PlayerUtils;
@@ -74,14 +73,25 @@ public class ItemInteractEvent implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         if ( (event.getAction() != Action.PHYSICAL) && (event.getItem() != null) ) {
-            Actions action = Actions.getActionIfExist(
-                    PlayerUtils.getClickType(event.getAction(), event.getPlayer().isSneaking()),
-                    Items.getItemIfExist(event.getItem())
-            );
 
-            if (action != null) {
-                event.setCancelled(true);
-                arenaKeeper.getHero(event.getPlayer()).useSpell(action);
+            ItemMeta itemMeta = event.getItem().getItemMeta();
+            if (itemMeta != null) {
+                if (itemMeta.equals(HubsArena.ITEM_MENU.getItemMeta())) { // Lobby item menu check
+                    event.setCancelled(true);
+                    PlayerUtils.openMenuToPlayer(event.getPlayer(), HubsArena.CHEST_MENU);
+                } else { // Arena action check
+
+                    Actions action = Actions.getActionIfExist(
+                            PlayerUtils.getClickType(event.getAction(), event.getPlayer().isSneaking()),
+                            Items.getItemIfExist(itemMeta)
+                    );
+
+                    if (action != null) {
+                        event.setCancelled(true);
+                        arenaKeeper.getHero(event.getPlayer()).useSpell(action);
+                    }
+
+                }
             }
         }
     }

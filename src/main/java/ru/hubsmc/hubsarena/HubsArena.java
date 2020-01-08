@@ -1,6 +1,7 @@
 package ru.hubsmc.hubsarena;
 
 import org.bukkit.*;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -10,6 +11,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.hubsmc.hubsarena.command.CommandGo;
 import ru.hubsmc.hubsarena.event.*;
+import ru.hubsmc.ru.hubschesterton.internal.ClickHandler;
+import ru.hubsmc.ru.hubschesterton.internal.menu.ChestMenu;
+import ru.hubsmc.ru.hubschesterton.internal.parser.MenuParser;
 
 import java.io.File;
 import java.util.*;
@@ -31,6 +35,7 @@ public final class HubsArena extends JavaPlugin {
     public static Location LOBBY_LOCATION;
     public static List<Location> SPAWN_LOCATIONS;
     public static ItemStack ITEM_MENU;
+    public static ChestMenu CHEST_MENU;
     public static List<String> JOIN_NOTIFICATIONS;
 
     private ArenaKeeper arenaKeeper;
@@ -168,8 +173,30 @@ public final class HubsArena extends JavaPlugin {
         ItemStack stack = new ItemStack(Material.getMaterial(configuration.getString("menu.material")));
         ItemMeta meta = stack.getItemMeta();
         meta.setDisplayName(replaceColor(configuration.getString("menu.name")));
+        meta.setLore(replaceColor(configuration.getStringList("menu.lore")));
         stack.setItemMeta(meta);
         ITEM_MENU = stack;
+
+        CHEST_MENU = MenuParser.parseChestMenu(configuration.getString("menu.chesterton-file"));
+        ConfigurationSection section = configuration.getConfigurationSection("menu.chesterton-items");
+        if (section != null) {
+            for (String key : section.getKeys(false)) {
+                int slot = Integer.parseInt(key);
+                CHEST_MENU.getItem(slot).setClickHandler(new ClickHandler() {
+                    @Override
+                    public boolean onClick(Player player) {
+                        ArenaKeeper.Heroes hero = ArenaKeeper.Heroes.getHeroByName(section.getString(key));
+                        if (hero != null) {
+                            arenaKeeper.pickHero(player, hero);
+                            player.closeInventory();
+                            arenaKeeper.sendPlayerToBattlefield(player);
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+            }
+        }
 
     }
 

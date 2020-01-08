@@ -81,6 +81,13 @@
             <systemPath>${basedir}/lib/HubsValues-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>ru.hubsmc.hubsvalues</groupId>
+            <artifactId>HubsChesterton</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/HubsChesterton-1.0-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>net.Indyuce</groupId>
             <artifactId>MMOItems</artifactId>
             <version>5.1-SNAPSHOT</version>

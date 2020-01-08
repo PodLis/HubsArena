@@ -16,6 +16,7 @@ import static ru.hubsmc.hubsvalues.api.API.addDollars;
 import static ru.hubsmc.hubsvalues.api.API.updateCustomPlaceholders;
 
 public class ArenaKeeper {
+
     private File dataFile;
     private YamlConfiguration dataFileConfig;
 
@@ -31,7 +32,20 @@ public class ArenaKeeper {
     /*
      *  Heroes
      */
-    public enum Heroes {ARCHER, KNIGHT, PYRO, BERSERK, ENDER_GLEK, ASSASSIN, FLIER, COWBOY}
+    public enum Heroes {
+        ARCHER, KNIGHT, PYRO, BERSERK, ENDER_GLEK, SPIRIT, FLIER, COWBOY;
+
+        public static Heroes getHeroByName(String name) {
+            if (name == null) {
+                return null;
+            }
+            try {
+                return valueOf(name);
+            } catch (IllegalArgumentException e) {
+                return null;
+            }
+        }
+    }
 
     public void pickHero(Player player, Heroes heroes) {
         switch (heroes) {
@@ -51,8 +65,8 @@ public class ArenaKeeper {
                 heroMap.put(player, new Berserk(player));
                 break;
 
-            case ASSASSIN:
-                heroMap.put(player, new Assassin(player));
+            case SPIRIT:
+                heroMap.put(player, new Spirit(player));
                 break;
 
             case FLIER:

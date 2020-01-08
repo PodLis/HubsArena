@@ -37,6 +37,15 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
+      <library name="Maven: ru.hubsmc.hubsvalues:HubsChesterton:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/HubsChesterton-1.0-SNAPSHOT.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="Maven: net.Indyuce:MMOItems:5.1-SNAPSHOT">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/MMOItems-5.1-SNAPSHOT.jar!/" />

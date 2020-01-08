@@ -596,9 +596,9 @@ public enum Items {
         return itemStack;
     }
 
-    public static Items getItemIfExist(ItemStack itemStack) {
+    public static Items getItemIfExist(ItemMeta itemMeta) {
         for (Items item : Items.values()) {
-            if (item.itemStack.getItemMeta().equals(itemStack.getItemMeta())) {
+            if (item.itemStack.getItemMeta().equals(itemMeta)) {
                 return item;
             }
         }

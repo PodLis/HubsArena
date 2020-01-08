@@ -13,8 +13,15 @@ on-arena-join-notifications:
   - '%player% в образе %alt_hero% сейчас будет нагибать!'
 
 menu:
-  name: '&e&lКит меню'
   material: 'COMPASS'
+  name: '&e&lКит меню'
+  lore:
+    - "&fКликни, чтобы"
+    - "&6&l1πДВЕРЬАСИТЬСЯ"
+  chesterton-file: "arena-menu"
+  chesterton-items:
+    18: "KNIGHT"
+    27: "ARCHER"
 
 arena-spawns:
   - '-13.5:64:-150.5'

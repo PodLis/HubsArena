@@ -5,13 +5,13 @@ import ru.hubsmc.hubsarena.ArenaKeeper;
 import ru.hubsmc.hubsarena.data.MiItems;
 import ru.hubsmc.hubsarena.data.PotionEffects;
 
-public class Assassin extends Hero {
+public class Spirit extends Hero {
 
     static {
-        setNames(ArenaKeeper.Heroes.ASSASSIN, "Ассасин", "Ассасина");
+        setNames(ArenaKeeper.Heroes.SPIRIT, "Призрак", "Призрака");
     }
 
-    public Assassin(Player player) {
+    public Spirit(Player player) {
         super(player);
     }
 
