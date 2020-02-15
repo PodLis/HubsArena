@@ -1,20 +1,11 @@
 package ru.hubsmc.hubsarena.event;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
-import org.bukkit.scoreboard.Team;
 import ru.hubsmc.hubsarena.ArenaKeeper;
-import ru.hubsmc.hubsarena.heroes.Berserk;
-import ru.hubsmc.hubsarena.heroes.Hero;
-
-import java.util.Set;
 
 public class PlayerKillEvent implements Listener {
 

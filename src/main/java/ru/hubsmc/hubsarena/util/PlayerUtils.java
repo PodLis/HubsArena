@@ -6,8 +6,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.potion.PotionEffect;
 import ru.hubsmc.hubsarena.data.Particles;
 import ru.hubsmc.hubsarena.data.Sounds;
-import ru.hubsmc.ru.hubschesterton.internal.menu.ChestMenu;
-import ru.hubsmc.ru.hubschesterton.internal.parser.MenuParser;
+import ru.hubsmc.hubscore.module.chesterton.internal.menu.ChestMenu;
 
 public class PlayerUtils {
 

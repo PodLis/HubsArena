@@ -3,17 +3,17 @@ package ru.hubsmc.hubsarena;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
 import ru.hubsmc.hubsarena.command.CommandGo;
 import ru.hubsmc.hubsarena.event.*;
-import ru.hubsmc.ru.hubschesterton.internal.ClickHandler;
-import ru.hubsmc.ru.hubschesterton.internal.menu.ChestMenu;
-import ru.hubsmc.ru.hubschesterton.internal.parser.MenuParser;
+import ru.hubsmc.hubscore.HubsPlugin;
+import ru.hubsmc.hubscore.PluginUtils;
+import ru.hubsmc.hubscore.module.chesterton.internal.ClickHandler;
+import ru.hubsmc.hubscore.module.chesterton.internal.menu.ChestMenu;
+import ru.hubsmc.hubscore.module.chesterton.internal.parser.MenuParser;
 
 import java.io.File;
 import java.util.*;
@@ -21,7 +21,7 @@ import java.util.logging.Level;
 
 import static ru.hubsmc.hubsarena.util.StringUtils.replaceColor;
 
-public final class HubsArena extends JavaPlugin {
+public final class HubsArena extends HubsPlugin {
 
     // temporary solution
     public List<Player> disabledFallDamagePlayers;
@@ -41,10 +41,10 @@ public final class HubsArena extends JavaPlugin {
     private ArenaKeeper arenaKeeper;
 
     private static FileConfiguration configuration;
-    private static File configFile;
+    private File arenaFolder;
 
     @Override
-    public void onEnable() {
+    public void afterCoreStart() {
 
         this.disabledFallDamagePlayers = new LinkedList<>();
 
@@ -82,7 +82,40 @@ public final class HubsArena extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() {
+    public void beforeCoreStop() {
+    }
+
+    @Override
+    public void onPluginEnable() {
+    }
+
+    @Override
+    public void onPluginDisable() {
+    }
+
+    @Override
+    public void onPlayerJoin(Player player) {
+    }
+
+    @Override
+    public void onPlayerQuit(Player player) {
+    }
+
+    @Override
+    public void onReload() {
+    }
+
+    @Override
+    public void onStringsReload() {
+    }
+
+    @Override
+    public void onSchedule() {
+    }
+
+    @Override
+    public String getStringData(String s) {
+        return null;
     }
 
     public ArenaKeeper getArenaKeeper() {
@@ -131,23 +164,9 @@ public final class HubsArena extends JavaPlugin {
     }
 
     void loadConfiguration() {
-        try {
-            if (configFile == null) {
-                configFile = new File(getFolder(), "config.yml");
-            }
-            if (configFile.exists()) {
-                configuration = YamlConfiguration.loadConfiguration(configFile);
-                configuration.load(configFile);
-                reloadConfig();
-            } else {
-                saveResource("config.yml", false);
-                configuration = YamlConfiguration.loadConfiguration(configFile);
-                logConsole("The 'config.yml' file successfully created!");
-            }
-        } catch (Throwable e) {
-            e.printStackTrace();
-            logConsole(Level.WARNING, "There was a file error.");
-        }
+
+        arenaFolder = new File(PluginUtils.getMainFolder(), "server_arena");
+        configuration = PluginUtils.getConfigInFolder(arenaFolder, "config");
 
         JOIN_NOTIFICATIONS = configuration.getStringList("on-arena-join-notifications");
 

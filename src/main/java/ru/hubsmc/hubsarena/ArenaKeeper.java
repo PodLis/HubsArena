@@ -6,14 +6,14 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import ru.hubsmc.hubsarena.heroes.*;
 import ru.hubsmc.hubsarena.util.PlayerUtils;
+import ru.hubsmc.hubscore.PluginUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static ru.hubsmc.hubsvalues.api.API.addDollars;
-import static ru.hubsmc.hubsvalues.api.API.updateCustomPlaceholders;
+import static ru.hubsmc.hubscore.module.values.api.API.addDollars;
 
 public class ArenaKeeper {
 
@@ -85,7 +85,7 @@ public class ArenaKeeper {
                 break;
             }
         }
-        updateCustomPlaceholders(player, heroMap.get(player).getName(), "", "", "");
+        PluginUtils.getHubsPlayer(player).updateCustomVars(heroMap.get(player).getName(), "", "", "");
     }
 
     public Hero getHero(Player player) {

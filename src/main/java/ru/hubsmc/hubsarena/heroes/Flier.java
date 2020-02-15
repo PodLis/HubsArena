@@ -24,7 +24,7 @@ public class Flier extends Hero{
         PlayerInventory inv = player.getInventory();
         inv.setChestplate(Items.FLYER_CHEST.getItemStack());
 
-        inv.setItem(0, MiItems.FLYER_STICK.getItemStack());
+        inv.setItem(0, MiItems.FLIER_STICK.getItemStack());
     }
 
     @Override

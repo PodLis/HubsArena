@@ -13,7 +13,7 @@ public enum MiItems {
     GLEK_SWORD("sword", "ENDERSWORD"),
     KOSA("sword", "KOSA_BESA"),
     BONE("sword", "KITPVP_BONE"),
-    FLYER_STICK("sword", "KITPVP_FLYERSTICK"),
+    FLIER_STICK("sword", "KITPVP_FLYERSTICK"),
 
     FIRST_TEST_MI_ITEM(
             HubsArena.getStringConfigData("miitems.FIRST_TEST_MI_ITEM.itemType"),

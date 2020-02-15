@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static ru.hubsmc.hubsvalues.api.API.takeMana;
+import static ru.hubsmc.hubscore.module.values.api.API.takeMana;
 
 public abstract class Hero {
 
