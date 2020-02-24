@@ -14,9 +14,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
 
-import static ru.hubsmc.hubsarena.util.StringUtils.replaceColor;
+import static ru.hubsmc.hubscore.util.MessageUtils.*;
 
 public class Commands implements CommandExecutor, TabCompleter {
 
@@ -30,134 +29,101 @@ public class Commands implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         try {
             if (command.getName().equalsIgnoreCase("hubsarena")) {
-                if (args.length == 0) {
-                    sendPrefixMessage(sender, "&b&l Info");
-                    sendMessage(sender, "&5Version:&a " + plugin.getDescription().getVersion());
-                    sendMessage(sender, "&5Author, created by:&a Rosenboum, pavel151");
-                } else {
-                    switch (args[0].toLowerCase()) {
-                        case "help":
-                            if (!sender.hasPermission(Permissions.Perm.HELP.getPerm())) {
-                                sendPrefixMessage(sender, "You have no permissions to use&6 " + args[0]);
-                                return true;
-                            }
-                            sendPrefixMessage(sender, "Commands:");
-                            sendMessage(sender, "/" + label + " reload&7 - Reloads the plugin.");
-                            sendMessage(sender, "/" + label + " send <player> [hero]&7 - Send player to battle.");
+                switch (args[0].toLowerCase()) {
+
+                    case "send":
+                        if (sender instanceof Player && !sender.hasPermission(Permissions.Perm.SEND.getPerm())) {
+                            sendNoPermMessage(sender, args[0]);
                             return true;
+                        }
 
-
-                        case "reload":
-                            if (sender instanceof Player && !sender.hasPermission(Permissions.Perm.RELOAD.getPerm())) {
-                                sendPrefixMessage(sender, "You have no permissions to use&6 " + args[0]);
-                                return true;
-                            }
-
-                            plugin.getArenaKeeper().savePlayers();
-                            plugin.loadConfiguration();
-                            plugin.getArenaKeeper().loadPlayers();
-
-                            sendPrefixMessage(sender, "Plugin reloaded.");
-
+                        if (args.length < 2) {
+                            sendWrongUsageMessage(sender, "send <player> [hero]");
                             return true;
+                        }
 
+                        Player target = Bukkit.getPlayer(args[1]);
+                        if (target == null) {
+                            sendMustBePlayerMessage(sender, args[1]);
+                            return true;
+                        }
 
-                        case "send":
-                            if (sender instanceof Player && !sender.hasPermission(Permissions.Perm.SEND.getPerm())) {
-                                sendPrefixMessage(sender, "You have no permissions to use&6 " + args[0]);
-                                return true;
-                            }
-
-                            if (args.length < 2) {
-                                sendPrefixMessage(sender, "Not enough arguments!");
-                                return true;
-                            }
-
-                            Player target = Bukkit.getPlayer(args[1]);
-                            if (target == null) {
-                                sendPrefixMessage(sender, "Player must be online!");
-                                return true;
-                            }
-
-                            if (args.length > 2) {
-                                try {
-                                    ArenaKeeper.Heroes hero = ArenaKeeper.Heroes.valueOf(args[2].toUpperCase());
-                                    plugin.getArenaKeeper().pickHero(target, hero);
-                                } catch (Throwable E) {
-                                    if (sender instanceof Player) {
-                                        sendPrefixMessage(sender, "Неизвестный кит...");
-                                    }
+                        if (args.length > 2) {
+                            try {
+                                ArenaKeeper.Heroes hero = ArenaKeeper.Heroes.valueOf(args[2].toUpperCase());
+                                plugin.getArenaKeeper().pickHero(target, hero);
+                            } catch (Throwable E) {
+                                if (sender instanceof Player) {
+                                    sendPrefixMessage(sender, "Неизвестный класс...");
                                 }
                             }
-                            plugin.getArenaKeeper().sendPlayerToBattlefield(target);
+                        }
+                        plugin.getArenaKeeper().sendPlayerToBattlefield(target);
 
+                        return true;
+
+
+                    case "lobby":
+                        if (!(sender instanceof Player)) {
+                            sendMustBePlayerMessage(sender, args[1]);
                             return true;
+                        }
 
+                        Player player = (Player) sender;
 
-                        case "lobby":
-                            if (!(sender instanceof Player)) {
-                                sendPrefixMessage(sender, "goer must be a player!");
-                                return true;
-                            }
-
-                            Player player = (Player) sender;
-
-                            if (!player.hasPermission(Permissions.Perm.SEND.getPerm())) {
-                                sendPrefixMessage(player, "You have no permissions to use&6 " + args[0]);
-                                return true;
-                            }
-
-                            plugin.getArenaKeeper().sendPlayerToLobby(player);
+                        if (!player.hasPermission(Permissions.Perm.SEND.getPerm())) {
+                            sendNoPermMessage(player, args[0]);
                             return true;
+                        }
 
-                        case "test":
-                            if (!(sender instanceof Player)) {
-                                sendPrefixMessage(sender, "goer must be a player!");
-                                return true;
-                            }
+                        plugin.getArenaKeeper().sendPlayerToLobby(player);
+                        return true;
 
-                            Player player1 = (Player) sender;
-
-                            if (!player1.hasPermission(Permissions.Perm.SEND.getPerm())) {
-                                sendPrefixMessage(player1, "You have no permissions to use&6 " + args[0]);
-                                return true;
-                            }
-
-                            if (args.length < 3) {
-                                sendPrefixMessage(sender, "Not enough arguments!");
-                                return true;
-                            }
-
-                            switch (args[1].toLowerCase()) {
-                                case "particles":
-                                    PlayerUtils.spawnParticle(Particles.valueOf(args[2].toUpperCase()), player1);
-                                    return true;
-                                case "sounds":
-                                    PlayerUtils.playSound(Sounds.valueOf(args[2].toUpperCase()), player1);
-                                    return true;
-                                case "items":
-                                    player1.getInventory().addItem(Items.valueOf(args[2].toUpperCase()).getItemStack());
-                                    return true;
-                                case "miitems":
-                                    player1.getInventory().addItem(MiItems.valueOf(args[2].toUpperCase()).getItemStack());
-                                    return true;
-                                case "effects":
-                                    player1.addPotionEffect(PotionEffects.valueOf(args[2].toUpperCase()).getPotionEffect());
-                                    return true;
-                            }
-
+                    case "test":
+                        if (!(sender instanceof Player)) {
+                            sendMustBePlayerMessage(sender, args[1]);
                             return true;
+                        }
 
-                        default:
-                            sendPrefixMessage(sender, "unknown sub-command&6 " + args[0]);
+                        Player player1 = (Player) sender;
+
+                        if (!player1.hasPermission(Permissions.Perm.SEND.getPerm())) {
+                            sendNoPermMessage(player1, args[0]);
                             return true;
-                    }
+                        }
+
+                        if (args.length < 3) {
+                            sendWrongUsageMessage(sender, "test <type> <id>");
+                            return true;
+                        }
+
+                        switch (args[1].toLowerCase()) {
+                            case "particles":
+                                PlayerUtils.spawnParticle(Particles.valueOf(args[2].toUpperCase()), player1);
+                                return true;
+                            case "sounds":
+                                PlayerUtils.playSound(Sounds.valueOf(args[2].toUpperCase()), player1);
+                                return true;
+                            case "items":
+                                player1.getInventory().addItem(Items.valueOf(args[2].toUpperCase()).getItemStack());
+                                return true;
+                            case "miitems":
+                                player1.getInventory().addItem(MiItems.valueOf(args[2].toUpperCase()).getItemStack());
+                                return true;
+                            case "effects":
+                                player1.addPotionEffect(PotionEffects.valueOf(args[2].toUpperCase()).getPotionEffect());
+                                return true;
+                        }
+
+                        return true;
+
+                    default:
+                        sendUnknownCommandMessage(sender, args[0]);
+                        return true;
                 }
             }
         } catch (Throwable e) {
             e.printStackTrace();
-            plugin.logConsole(Level.WARNING, "Some troubles with commands.");
-            plugin.logConsole("oops...");
         }
         return true;
     }
@@ -232,21 +198,13 @@ public class Commands implements CommandExecutor, TabCompleter {
 
     private List<String> getCmds(CommandSender sender) {
         List<String> c = new ArrayList<>();
-        for (String cmd : Arrays.asList("help", "reload", "send", "lobby", "test")) {
+        for (String cmd : Arrays.asList("send", "lobby", "test")) {
             if (!sender.hasPermission("hubsarena." + cmd)) {
                 continue;
             }
             c.add(cmd);
         }
         return c;
-    }
-
-    private void sendMessage(CommandSender sender, String message) {
-        sender.sendMessage(replaceColor(message));
-    }
-
-    private void sendPrefixMessage(CommandSender sender, String message) {
-        sender.sendMessage(HubsArena.CHAT_PREFIX + replaceColor(message));
     }
 
 }

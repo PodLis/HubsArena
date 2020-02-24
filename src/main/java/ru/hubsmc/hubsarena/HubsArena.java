@@ -19,7 +19,7 @@ import java.io.File;
 import java.util.*;
 import java.util.logging.Level;
 
-import static ru.hubsmc.hubsarena.util.StringUtils.replaceColor;
+import static ru.hubsmc.hubscore.util.StringUtils.replaceColor;
 
 public final class HubsArena extends HubsPlugin {
 
@@ -28,8 +28,6 @@ public final class HubsArena extends HubsPlugin {
 
     // temporary solution
     private static HubsArena instance;
-
-    public static final String CHAT_PREFIX = ChatColor.DARK_GREEN + "[" + ChatColor.GREEN + "HA" + ChatColor.DARK_GREEN + "] " + ChatColor.GREEN;
 
     public static World ARENA_WORLD;
     public static Location LOBBY_LOCATION;
@@ -58,8 +56,6 @@ public final class HubsArena extends HubsPlugin {
 
             PluginManager pm = getServer().getPluginManager();
 
-            pm.registerEvents(new LeaveEvent(arenaKeeper), this);
-            pm.registerEvents(new JoinEvent(arenaKeeper), this);
             pm.registerEvents(new MobKillEvent(arenaKeeper), this);
             pm.registerEvents(new ItemInteractEvent(arenaKeeper), this);
             pm.registerEvents(new PlayerKillEvent(arenaKeeper), this);
@@ -95,14 +91,19 @@ public final class HubsArena extends HubsPlugin {
 
     @Override
     public void onPlayerJoin(Player player) {
+        arenaKeeper.onJoinToArena(player);
     }
 
     @Override
     public void onPlayerQuit(Player player) {
+        arenaKeeper.savePlayer(player);
     }
 
     @Override
     public void onReload() {
+        arenaKeeper.savePlayers();
+        loadConfiguration();
+        arenaKeeper.loadPlayers();
     }
 
     @Override
@@ -115,7 +116,12 @@ public final class HubsArena extends HubsPlugin {
 
     @Override
     public String getStringData(String s) {
-        return null;
+        switch (s) {
+            case "tablo":
+                return configuration.getString("tablo");
+            default:
+                return "";
+        }
     }
 
     public ArenaKeeper getArenaKeeper() {

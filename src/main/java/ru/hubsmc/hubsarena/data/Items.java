@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import ru.hubsmc.hubsarena.HubsArena;
-import ru.hubsmc.hubsarena.util.StringUtils;
+import ru.hubsmc.hubscore.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
